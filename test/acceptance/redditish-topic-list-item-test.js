@@ -38,7 +38,7 @@ acceptance("Redditish Theme | custom topic list item", function (needs) {
     // pins the poster payload the outlet hands us
     assert
       .dom(".topic-list-item .custom-topic-layout_meta-posted a")
-      .hasText("@reyman64");
+      .hasText("reyman64");
   });
 
   test("opens the topic when the row is clicked", async function (assert) {
@@ -50,5 +50,15 @@ acceptance("Redditish Theme | custom topic list item", function (needs) {
       currentURL().startsWith("/t/internationalization-localization/280"),
       "navigates into the topic"
     );
+  });
+
+  test("share opens the native modal without navigating", async function (assert) {
+    await visit("/latest");
+
+    await click(".topic-list-item .share-toggle");
+
+    assert.strictEqual(currentURL(), "/latest");
+    assert.dom(".d-modal").exists();
+    assert.dom(".d-modal input").exists();
   });
 });

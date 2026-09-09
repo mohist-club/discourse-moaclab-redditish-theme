@@ -3,5 +3,10 @@ hide_topic_footer_controls:
   description: "Hides the reply/bookmark/share buttons at the bottom of each topic"
 
 show_like_count:
-  default: false
+  default: true
   description: "Shows the like count before the reply count in the topic list"
+
+svg_icons:
+  default: "far-heart|far-comment|far-share-from-square"
+  type: list
+  list_type: compact

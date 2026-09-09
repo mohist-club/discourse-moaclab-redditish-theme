@@ -66,20 +66,20 @@ body {
         "category-banner category-banner category-banner category-banner category-banner category-banner"
         "sidebar lspace content sidebar2 rspace sidebar-spacer";
       grid-template-columns:
-        var(--d-sidebar-width) 1fr minmax(0, 640px)
+        var(--d-sidebar-width) 1fr minmax(0, 756px)
         312px 1fr var(--d-sidebar-width);
       grid-template-rows: auto 1fr;
       gap: 0 1.5em;
 
       @media screen and (width <= 1500px) {
-        grid-template-columns: auto 1fr minmax(0, 640px) 312px 1fr auto;
+        grid-template-columns: auto 1fr minmax(0, 756px) 312px 1fr auto;
       }
 
       @media screen and (width <= 1160px) {
         grid-template-areas:
           "category-banner category-banner category-banner category-banner category-banner"
           "sidebar lspace content rspace sidebar-spacer";
-        grid-template-columns: auto 1fr minmax(0, 640px) 1fr auto;
+        grid-template-columns: auto 1fr minmax(0, 756px) 1fr auto;
 
         .custom-right-sidebar {
           display: none;
@@ -104,7 +104,7 @@ body {
         grid-template-areas:
           "sidebar category-banner category-banner category-banner category-banner"
           "sidebar lspace content rspace sidebar-spacer";
-        grid-template-columns: auto 1fr minmax(0, 640px) 1fr auto;
+        grid-template-columns: auto 1fr minmax(0, 756px) 1fr auto;
 
         .custom-right-sidebar {
           display: none;
@@ -216,3 +216,5 @@ html.composer-open #main-outlet {
 .fc-view-harness {
   background: var(--secondary);
 }
+
+@import "moaclab-feed";

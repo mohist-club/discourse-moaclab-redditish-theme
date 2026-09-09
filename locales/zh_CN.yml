@@ -1,0 +1,17 @@
+zh_CN:
+  theme_metadata:
+    description: "Moaclab 的 Reddit 风格社区主题"
+  top_route_welcome: "Moaclab 墨客社区"
+  top_route_description: "客制化机械键盘、键帽与创作交流。<a href='%{basePath}/categories'>浏览所有类别</a>"
+  about_category: "关于此类别"
+  about_admin_tip_headline: "类别介绍"
+  about_category_admin_tip_description: "编辑<a href=%{topicUrl}>此帖子</a>添加类别介绍。"
+  post_input_placeholder: "发布话题"
+  about_tag: "关于此标签"
+  about_tag_admin_tip_description: "添加标签介绍："
+  about_tag_admin_tip_description_link: "编辑介绍"
+  recent_topics: "最近浏览"
+  hot_topics: "热门话题"
+  top_tags: "热门标签"
+  subcategories: "子类别"
+  posted_by: "发布者"

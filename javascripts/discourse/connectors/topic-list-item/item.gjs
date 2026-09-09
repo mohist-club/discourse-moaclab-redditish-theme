@@ -10,6 +10,7 @@ import TopicLink from "discourse/components/topic-list/topic-link";
 import UnreadIndicator from "discourse/components/topic-list/unread-indicator";
 import TopicPostBadges from "discourse/components/topic-post-badges";
 import TopicStatus from "discourse/components/topic-status";
+import avatar from "discourse/helpers/avatar";
 import categoryLink from "discourse/helpers/category-link";
 import icon from "discourse/helpers/d-icon";
 import discourseTags from "discourse/helpers/discourse-tags";
@@ -41,10 +42,7 @@ export default class Item extends Component {
 
   @action
   openTopic(event) {
-    if (
-      (event.target.nodeName === "A" && !event.target.closest(".raw-link")) ||
-      event.target.closest(".badge-wrapper")
-    ) {
+    if (event.target.closest("a:not(.raw-link), button, .badge-wrapper")) {
       return;
     }
 
@@ -67,29 +65,24 @@ export default class Item extends Component {
 
   <template>
     {{! template-lint-disable no-invalid-interactive }}
-    <div {{on "click" this.openTopic}} class="custom-topic-layout">
+    <div
+      {{on "click" this.openTopic}}
+      class="custom-topic-layout moaclab-feed-item"
+    >
       <div class="custom-topic-layout_meta">
-        {{#unless @outletArgs.hideCategory}}
-          {{#unless @outletArgs.topic.isPinnedUncategorized}}
-            <PluginOutlet
-              @name="topic-list-before-category"
-              @outletArgs={{lazyHash topic=@outletArgs.topic}}
-            />
-            {{categoryLink @outletArgs.topic.category}}
-            <span class="bullet-separator">&bull;</span>
-          {{/unless}}
-        {{/unless}}
-
         <span class="custom-topic-layout_meta-posted">
-          <span class="custom-topic-layout_meta-posted-by">
-            {{i18n (themePrefix "posted_by")}}
-          </span>
-
           <a
+            class="moaclab-feed-author"
             data-user-card={{get @outletArgs "topic.posters.0.user.username"}}
             href="/u/{{get @outletArgs 'topic.posters.0.user.username'}}"
-          >@{{get @outletArgs "topic.posters.0.user.username"}}</a>
-
+          >
+            {{avatar
+              (get @outletArgs "topic.posters.0.user")
+              imageSize="small"
+            }}
+            <span>{{get @outletArgs "topic.posters.0.user.username"}}</span>
+          </a>
+          <span class="bullet-separator" aria-hidden="true">&bull;</span>
           {{formatDate
             @outletArgs.topic.createdAt
             format="medium"
@@ -97,6 +90,16 @@ export default class Item extends Component {
             leaveAgo="true"
           }}
         </span>
+
+        {{#unless @outletArgs.hideCategory}}
+          {{#unless @outletArgs.topic.isPinnedUncategorized}}
+            <PluginOutlet
+              @name="topic-list-before-category"
+              @outletArgs={{lazyHash topic=@outletArgs.topic}}
+            />
+            {{categoryLink @outletArgs.topic.category}}
+          {{/unless}}
+        {{/unless}}
       </div>
 
       <h2 class="link-top-line">
@@ -141,6 +144,9 @@ export default class Item extends Component {
       {{#if @outletArgs.topic.thumbnails}}
         <div class="custom-topic-layout_image">
           <img
+            alt={{@outletArgs.topic.title}}
+            loading="lazy"
+            decoding="async"
             height={{get @outletArgs "topic.thumbnails.0.height"}}
             width={{get @outletArgs "topic.thumbnails.0.width"}}
             src={{get @outletArgs "topic.thumbnails.0.url"}}
@@ -156,24 +162,27 @@ export default class Item extends Component {
 
       <div class="custom-topic-layout_bottom-bar">
         {{#if settings.show_like_count}}
-          <span class="like-count">
-            {{icon "heart"}}
+          <span class="like-count" title={{i18n "likes"}}>
+            {{icon "far-heart"}}
             {{@outletArgs.topic.like_count}}
-            {{i18n "likes"}}
+            <span class="sr-only">{{i18n "likes"}}</span>
           </span>
         {{/if}}
 
-        <span class="reply-count">
-          {{icon "reply"}}
+        <a
+          class="reply-count"
+          href={{@outletArgs.topic.lastUnreadUrl}}
+          title={{i18n "replies"}}
+        >
+          {{icon "far-comment"}}
           {{@outletArgs.topic.replyCount}}
-          {{i18n "replies"}}
-        </span>
+          <span class="sr-only">{{i18n "replies"}}</span>
+        </a>
 
-        {{! template-lint-disable no-invalid-interactive }}
-        <span {{on "click" this.share}} class="share-toggle">
-          {{icon "link"}}
+        <button type="button" {{on "click" this.share}} class="share-toggle">
+          {{icon "far-share-from-square"}}
           {{i18n "post.quote_share"}}
-        </span>
+        </button>
       </div>
     </div>
   </template>
