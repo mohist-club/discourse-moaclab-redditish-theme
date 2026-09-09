@@ -1,0 +1,246 @@
+@font-face {
+  font-family: "Reddit Sans";
+  src: url($reddit-sans) format("woff2");
+  font-style: normal;
+  font-weight: 300 900;
+  font-display: swap;
+}
+
+body:not(.admin-interface) {
+  --font-family:
+    "Reddit Sans", -apple-system, blinkmacsystemfont, "Segoe UI", "PingFang SC",
+    "Microsoft YaHei", sans-serif;
+  --heading-font-family: var(--font-family);
+  font-family: var(--font-family);
+  letter-spacing: 0;
+  background: var(--moaclab-canvas);
+  color: var(--moaclab-ink);
+}
+
+body.tags-page,
+body[class*="navigation-"]:not([class*="archetype-"]) {
+  --d-sidebar-width: 240px;
+
+  // Keep the native header search, while removing the duplicate welcome search.
+  &.search-header--visible .welcome-banner {
+    display: none;
+  }
+
+  #main-outlet-wrapper {
+    grid-template-columns:
+      var(--d-sidebar-width) minmax(0, 1fr) minmax(0, 756px)
+      312px minmax(0, 1fr);
+    grid-template-areas:
+      "sidebar category-banner category-banner category-banner category-banner"
+      "sidebar lspace content sidebar2 rspace";
+    gap: 0 24px;
+    padding-top: 16px;
+    margin-top: 0;
+  }
+
+  &.has-sidebar-page #main-outlet-wrapper {
+    grid-template-areas:
+      "sidebar category-banner category-banner category-banner category-banner"
+      "sidebar lspace content sidebar2 rspace";
+    grid-template-columns:
+      var(--d-sidebar-width) minmax(0, 1fr) minmax(0, 756px)
+      312px minmax(0, 1fr);
+  }
+
+  &:not(.has-sidebar-page) #main-outlet-wrapper {
+    grid-template-columns: 0 minmax(0, 1fr) minmax(0, 756px) 312px minmax(
+        0,
+        1fr
+      );
+  }
+
+  #main-outlet {
+    padding-top: 0;
+  }
+
+  #navigation-bar {
+    padding: 0 4px;
+    align-items: center;
+    border: 0;
+    box-shadow: none;
+
+    > li {
+      margin: 0;
+      border: 0;
+    }
+
+    > li > a,
+    > li > button {
+      color: var(--moaclab-muted);
+      background: transparent;
+      border: 0;
+      box-shadow: none;
+      font-size: 12px;
+      font-weight: 600;
+      text-decoration: none;
+
+      &.active,
+      &:hover {
+        background: var(--moaclab-surface);
+        color: var(--moaclab-ink);
+      }
+
+      &::after {
+        display: none;
+      }
+    }
+  }
+
+  .custom-right-sidebar {
+    margin-top: 0;
+    gap: 16px;
+    color: var(--moaclab-muted);
+
+    h2,
+    h4 {
+      color: var(--moaclab-ink);
+    }
+
+    &_welcome h2 {
+      font-size: 16px;
+      line-height: 22px;
+      margin: 0 0 8px;
+    }
+
+    &_recent h4 {
+      font-size: 12px;
+      line-height: 16px;
+      font-weight: 600;
+      margin: 0 0 12px;
+    }
+
+    &_recent-topics-wrapper {
+      border-color: var(--moaclab-line);
+
+      .custom-topic-layout {
+        background: transparent;
+        padding: 12px 0;
+      }
+    }
+
+    &_recent-topics .custom-topic-layout {
+      grid-template-areas: "content1 image" "content2 image" "content3 image";
+      grid-template-columns: minmax(0, 1fr) 72px;
+      column-gap: 12px;
+
+      .link-top-line {
+        font-size: 14px;
+        line-height: 20px;
+        font-weight: 600;
+      }
+
+      &_image {
+        width: 72px;
+        height: 72px;
+        margin: 0;
+        border-radius: 8px;
+      }
+    }
+  }
+
+  .sidebar-wrapper .sidebar-container {
+    border-color: var(--moaclab-line);
+    background: var(--moaclab-canvas);
+  }
+
+  .sidebar-section-link-wrapper .sidebar-section-link {
+    min-height: 40px;
+    font-size: 14px;
+    border-radius: 8px;
+    color: var(--moaclab-ink);
+
+    &.active,
+    &.exact-url-match {
+      background: var(--moaclab-pill);
+      color: var(--moaclab-ink);
+    }
+
+    .sidebar-section-link-content-text {
+      color: inherit;
+    }
+
+    &:hover {
+      background: var(--moaclab-surface);
+    }
+  }
+
+  @media (width <= 1200px) {
+    #main-outlet-wrapper,
+    &.has-sidebar-page #main-outlet-wrapper {
+      grid-template-columns:
+        var(--d-sidebar-width) minmax(0, 1fr) minmax(0, 756px)
+        minmax(0, 1fr);
+      grid-template-areas:
+        "sidebar category-banner category-banner category-banner"
+        "sidebar lspace content rspace";
+      column-gap: 16px;
+    }
+
+    &:not(.has-sidebar-page) #main-outlet-wrapper {
+      grid-template-columns: 0 minmax(0, 1fr) minmax(0, 756px) minmax(0, 1fr);
+    }
+
+    .custom-right-sidebar {
+      display: none;
+    }
+  }
+
+  @media (width <= 767px) {
+    #main-outlet-wrapper,
+    &.has-sidebar-page #main-outlet-wrapper,
+    &:not(.has-sidebar-page) #main-outlet-wrapper {
+      grid-template-areas: "category-banner" "content";
+      grid-template-columns: minmax(0, 1fr);
+      gap: 0 !important;
+      padding: 8px 0 0;
+    }
+
+    #navigation-bar {
+      padding-left: 4px;
+    }
+
+    .custom-category-banner,
+    .custom-tag-banner {
+      width: 100%;
+      margin-left: 0;
+    }
+  }
+}
+
+.d-header {
+  height: 56px;
+  background: var(--moaclab-canvas);
+  border-bottom: 1px solid var(--moaclab-line);
+
+  &:hover {
+    border-bottom-color: var(--moaclab-line);
+  }
+
+  .search-input,
+  .search-input-wrapper {
+    border: 0;
+    border-radius: 24px;
+    background: var(--moaclab-pill);
+  }
+
+  .search-input:has(#advanced-header-search-input) {
+    border: 0;
+    border-radius: 24px;
+    background: transparent;
+  }
+
+  #advanced-header-search-input {
+    min-height: 40px;
+    border: 0;
+    border-radius: 24px;
+    background: transparent;
+    font-family: inherit;
+    font-size: 14px;
+    box-shadow: none;
+  }
+}

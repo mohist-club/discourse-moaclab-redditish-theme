@@ -1,9 +1,12 @@
 {
   "about_url": "https://github.com/mohist-club/discourse-moaclab-redditish-theme",
   "license_url": null,
-  "assets": {},
+  "assets": {
+    "reddit-sans": "assets/reddit-sans.woff2",
+    "share-outline": "assets/share-outline.svg"
+  },
   "name": "Moaclab Redditish",
-  "theme_version": "1.1.0",
+  "theme_version": "1.2.0",
   "modifiers": {
     "serialize_topic_excerpts": true,
     "topic_thumbnail_sizes": [

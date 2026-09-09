@@ -24,6 +24,13 @@ export default class Item extends Component {
   @service currentUser;
   @service modal;
 
+  get imageRatioStyle() {
+    const thumbnail = this.args.outletArgs.topic.thumbnails?.[0];
+    const ratio = Number(thumbnail?.width) / Number(thumbnail?.height);
+    const safeRatio = Number.isFinite(ratio) && ratio > 0 ? ratio : 4 / 3;
+    return `--moaclab-image-ratio: ${Math.min(2, Math.max(1, safeRatio))}`;
+  }
+
   get newDotText() {
     return this.currentUser?.trust_level > 0
       ? ""
@@ -142,7 +149,7 @@ export default class Item extends Component {
       </div>
 
       {{#if @outletArgs.topic.thumbnails}}
-        <div class="custom-topic-layout_image">
+        <div class="custom-topic-layout_image" style={{this.imageRatioStyle}}>
           <img
             alt={{@outletArgs.topic.title}}
             loading="lazy"
@@ -180,7 +187,7 @@ export default class Item extends Component {
         </a>
 
         <button type="button" {{on "click" this.share}} class="share-toggle">
-          {{icon "far-share-from-square"}}
+          <span class="moaclab-share-icon" aria-hidden="true"></span>
           {{i18n "post.quote_share"}}
         </button>
       </div>

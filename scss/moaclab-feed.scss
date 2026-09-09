@@ -48,9 +48,10 @@ body[class*="navigation-"]:not([class*="archetype-"]) {
       &::before {
         content: "";
         position: absolute;
-        inset: 0 12px auto;
+        inset: 0;
+        bottom: auto;
         height: 1px;
-        background: var(--primary-low);
+        background: var(--moaclab-line);
         pointer-events: none;
       }
     }
@@ -80,7 +81,7 @@ body[class*="navigation-"]:not([class*="archetype-"]) {
       border: 0;
       border-radius: 8px;
       padding: 16px;
-      background: var(--primary-very-low);
+      background: var(--moaclab-surface);
     }
   }
 }
@@ -89,10 +90,10 @@ body[class*="navigation-"]:not([class*="archetype-"]) {
   box-sizing: border-box;
   display: flex;
   flex-direction: column;
-  gap: 6px;
-  padding: 8px 12px;
+  gap: 8px;
+  padding: 8px 16px;
   border: 0;
-  border-radius: 8px;
+  border-radius: 16px;
   background: transparent;
   box-shadow: none;
   letter-spacing: 0;
@@ -101,12 +102,12 @@ body[class*="navigation-"]:not([class*="archetype-"]) {
   @media (hover: hover) {
     &:hover {
       border: 0;
-      background: var(--primary-very-low);
+      background: var(--moaclab-surface);
     }
   }
 
   &:focus-within {
-    background: var(--primary-very-low);
+    background: var(--moaclab-surface);
   }
 
   .custom-topic-layout_meta {
@@ -117,8 +118,8 @@ body[class*="navigation-"]:not([class*="archetype-"]) {
     margin: 0;
     padding: 0;
     font-size: 12px;
-    line-height: 20px;
-    color: var(--primary-high);
+    line-height: 16px;
+    color: var(--moaclab-muted);
 
     &-posted {
       display: flex;
@@ -131,7 +132,7 @@ body[class*="navigation-"]:not([class*="archetype-"]) {
 
     .badge-wrapper,
     .badge-category__wrapper {
-      margin: 0 0 0 auto;
+      margin: 0;
       max-width: 100%;
       font-size: 12px;
     }
@@ -143,16 +144,16 @@ body[class*="navigation-"]:not([class*="archetype-"]) {
     gap: 8px;
     min-width: 0;
     font-weight: 600;
-    color: var(--primary);
+    color: var(--moaclab-ink);
 
     span {
       overflow-wrap: anywhere;
     }
 
     .avatar {
-      width: 28px;
-      height: 28px;
-      flex: 0 0 28px;
+      width: 24px;
+      height: 24px;
+      flex: 0 0 24px;
       border-radius: 50%;
     }
   }
@@ -161,8 +162,8 @@ body[class*="navigation-"]:not([class*="archetype-"]) {
     display: block;
     padding: 0;
     margin: 0 !important;
-    font-size: 20px;
-    line-height: 26px;
+    font-size: 18px;
+    line-height: 24px;
     font-weight: 600;
     min-height: 0;
 
@@ -170,7 +171,7 @@ body[class*="navigation-"]:not([class*="archetype-"]) {
     a.title:visited {
       padding: 0;
       font: inherit;
-      color: var(--primary);
+      color: var(--moaclab-ink);
     }
   }
 
@@ -184,13 +185,14 @@ body[class*="navigation-"]:not([class*="archetype-"]) {
     grid-template-rows: minmax(0, 1fr);
     place-items: center;
     width: 100%;
-    aspect-ratio: 4 / 3;
+    aspect-ratio: var(--moaclab-image-ratio, 4 / 3);
     max-height: 560px;
     min-width: 0;
-    margin: 2px 0;
-    border-radius: 8px;
+    margin: 0;
+    border-radius: 16px;
     overflow: hidden;
-    background: var(--primary-very-low);
+    background: var(--moaclab-surface);
+    box-shadow: inset 0 0 0 1px var(--moaclab-line);
 
     img {
       display: block;
@@ -240,8 +242,8 @@ body[class*="navigation-"]:not([class*="archetype-"]) {
       padding: 0 12px;
       border: 0;
       border-radius: 20px;
-      background: color-mix(in srgb, var(--primary) 9%, var(--secondary));
-      color: var(--primary);
+      background: var(--moaclab-pill);
+      color: var(--moaclab-ink);
       font-family: inherit;
       font-size: 12px;
       font-weight: 600;
@@ -250,21 +252,29 @@ body[class*="navigation-"]:not([class*="archetype-"]) {
       white-space: nowrap;
 
       .d-icon {
-        width: 18px;
-        height: 18px;
+        width: 20px;
+        height: 20px;
         margin: 0;
         color: currentcolor;
       }
     }
 
     > .share-toggle {
-      margin-left: auto;
       cursor: pointer;
+
+      .moaclab-share-icon {
+        display: inline-block;
+        width: 20px;
+        height: 20px;
+        margin: 0;
+        background: currentcolor;
+        mask: url($share-outline) center / contain no-repeat;
+      }
     }
 
     > a:hover,
     > button:hover {
-      background: color-mix(in srgb, var(--primary) 15%, var(--secondary));
+      background: var(--moaclab-pill-hover);
     }
 
     > a:focus-visible,

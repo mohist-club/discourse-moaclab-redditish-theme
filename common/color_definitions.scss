@@ -23,6 +23,13 @@ $redditish-border-highlight-color: $primary-200 !default;
 }
 
 :root {
+  --moaclab-canvas: #{dark-light-choose(#fff, #0e1113)};
+  --moaclab-surface: #{dark-light-choose(#f6f8f9, #181c1f)};
+  --moaclab-ink: #{dark-light-choose(#0f1a1c, #eef1f3)};
+  --moaclab-muted: #{dark-light-choose(#576f76, #a7b8bf)};
+  --moaclab-line: #{dark-light-choose(#e2e7e9, #30383c)};
+  --moaclab-pill: #{dark-light-choose(#e5ebee, #2a3236)};
+  --moaclab-pill-hover: #{dark-light-choose(#dbe4e9, #39454b)};
   --redditish-bg-color: #{$redditish-background-color};
   --redditish-border-color: #{$redditish-border-color};
   --redditish-border-highlight-color: #{$redditish-border-highlight-color};

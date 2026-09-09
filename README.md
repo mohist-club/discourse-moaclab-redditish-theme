@@ -19,7 +19,19 @@ https://github.com/mohist-club/discourse-moaclab-redditish-theme.git
 - Upstream: https://github.com/discourse/discourse-redditish-theme
 - Meta topic: https://meta.discourse.org/t/-/269466
 
-版本：`1.1.0`
+版本：`1.2.0`
+
+## 1.2.0
+
+- 使用随主题托管的 Reddit Sans 可变字体和独立的浅色、深色视觉配色。
+- 统一三栏布局、顶部搜索、导航、侧栏与信息流；保留原生交互。
+- 原生页眉搜索可见时隐藏重复的欢迎搜索区。
+- 16px 图片与悬停圆角，18px 标题，24px 头像，32px 操作按钮。
+- 图片根据原始宽高比显示，控制极端比例；分享按钮使用轻量线框箭头。
+
+字体：[Reddit Sans](https://github.com/reddit/redditsans)，SIL Open Font License。
+图标：[Lucide](https://github.com/lucide-icons/lucide)，ISC License。
+许可证随资源保留在 `assets/`。
 
 ## 1.1.0
 
