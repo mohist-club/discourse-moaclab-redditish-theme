@@ -19,7 +19,14 @@ https://github.com/mohist-club/discourse-moaclab-redditish-theme.git
 - Upstream: https://github.com/discourse/discourse-redditish-theme
 - Meta topic: https://meta.discourse.org/t/-/269466
 
-版本：`1.3.0`
+版本：`1.3.1`
+
+## 1.3.1
+
+- 顶部原生菜单固定为 56px 高度，保留占位，滚动时不遮挡首屏内容。
+- 桌面侧栏宽度 272px，恢复 1px 右侧分隔线，保留原生整栏收起和分组折叠。
+- 导航行高 40px、字体 14px / 20px、图标 20px、图文间距 12px、水平内边距 16px。
+- 上述为本主题明确固定的尺寸；Reddit 实时页面受验证限制，未声明全像素一致。
 
 ## 1.3.0
 

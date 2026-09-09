@@ -7,6 +7,8 @@
 }
 
 body:not(.admin-interface) {
+  --d-sidebar-width: 272px;
+  --moaclab-header-height: 56px;
   --font-family:
     "Reddit Sans", -apple-system, blinkmacsystemfont, "Segoe UI", "PingFang SC",
     "Microsoft YaHei", sans-serif;
@@ -19,7 +21,7 @@ body:not(.admin-interface) {
 
 body.tags-page,
 body[class*="navigation-"]:not([class*="archetype-"]) {
-  --d-sidebar-width: 240px;
+  --d-sidebar-width: 272px;
 
   // Keep the native header search, while removing the duplicate welcome search.
   &.search-header--visible .welcome-banner {
@@ -199,8 +201,20 @@ body[class*="navigation-"]:not([class*="archetype-"]) {
   }
 }
 
+// Retain a spacer in document flow while the native header stays fixed.
+body:not(.admin-interface) .d-header-wrap {
+  position: relative;
+  height: var(--moaclab-header-height);
+  min-height: var(--moaclab-header-height);
+  z-index: 1000;
+  transform: none;
+}
+
 body:not(.admin-interface) .d-header {
-  height: 56px;
+  position: fixed;
+  inset: 0 0 auto;
+  height: var(--moaclab-header-height);
+  box-sizing: border-box;
   background: var(--moaclab-canvas);
   border: 0;
   box-shadow: 0 2px 12px rgb(0 0 0 / 4%);
@@ -313,26 +327,31 @@ body:not(.admin-interface) .d-header {
 
 body:not(.admin-interface) :is(.sidebar-wrapper, .sidebar-hamburger-dropdown) {
   --d-sidebar-row-height: 40px;
-  --d-sidebar-row-horizontal-padding: 12px;
+  --d-sidebar-row-horizontal-padding: 16px;
 
   .sidebar-container {
     border: 0;
     background: var(--moaclab-canvas);
   }
 
+  .sidebar-sections {
+    padding: 12px 16px;
+  }
+
   .sidebar-section-wrapper {
     border: 0;
     padding: 0;
-    margin: 0 8px 12px;
+    margin: 0 0 12px;
   }
 
   .sidebar-section-content {
     border: 0;
     padding: 0;
+    gap: 0;
   }
 
   .sidebar-section-link-wrapper {
-    margin: 2px 0;
+    margin: 0;
   }
 
   .sidebar-section-link,
@@ -341,8 +360,9 @@ body:not(.admin-interface) :is(.sidebar-wrapper, .sidebar-hamburger-dropdown) {
     display: flex;
     align-items: center;
     width: 100%;
+    height: 40px;
     min-height: 40px;
-    padding: 8px 12px !important;
+    padding: 10px 16px !important;
     border: 0;
     border-radius: 8px;
     box-shadow: none;
@@ -382,19 +402,31 @@ body:not(.admin-interface) :is(.sidebar-wrapper, .sidebar-hamburger-dropdown) {
   }
 
   .sidebar-section-link-prefix {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
     flex: 0 0 20px;
     width: 20px;
+    height: 20px;
     margin-right: 12px;
+
+    .d-icon,
+    img {
+      width: 20px;
+      height: 20px;
+      font-size: 20px;
+      object-fit: contain;
+    }
   }
 
   .sidebar-section-header-wrapper {
     padding: 0;
-    min-height: 36px;
+    min-height: 40px;
 
     .sidebar-section-header {
-      min-height: 36px;
-      font-size: 12px;
-      font-weight: 500;
+      min-height: 40px;
+      font-size: 14px;
+      font-weight: 400;
       color: var(--moaclab-muted);
     }
 
@@ -405,6 +437,9 @@ body:not(.admin-interface) :is(.sidebar-wrapper, .sidebar-hamburger-dropdown) {
 
     .sidebar-section-header-caret {
       order: 1;
+      flex: 0 0 16px;
+      width: 16px;
+      height: 16px;
       margin-left: auto;
       margin-right: 0;
     }
@@ -421,6 +456,27 @@ body:not(.admin-interface) :is(.sidebar-wrapper, .sidebar-hamburger-dropdown) {
     border-radius: 8px;
     background: var(--moaclab-canvas);
     box-shadow: 0 8px 24px rgb(0 0 0 / 12%);
+  }
+}
+
+@media (width >= 768px) {
+  body:not(.admin-interface).has-sidebar-page .sidebar-wrapper {
+    box-sizing: border-box;
+    position: sticky;
+    top: var(--moaclab-header-height);
+    height: calc(100dvh - var(--moaclab-header-height));
+    border-right: 1px solid var(--moaclab-line);
+    overscroll-behavior-y: contain;
+
+    .sidebar-container {
+      height: 100%;
+    }
+  }
+
+  body.tags-page.has-sidebar-page .sidebar-wrapper,
+  body[class*="navigation-"].has-sidebar-page:not([class*="archetype-"])
+    .sidebar-wrapper {
+    margin-top: -16px;
   }
 }
 
