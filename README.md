@@ -19,7 +19,14 @@ https://github.com/mohist-club/discourse-moaclab-redditish-theme.git
 - Upstream: https://github.com/discourse/discourse-redditish-theme
 - Meta topic: https://meta.discourse.org/t/-/269466
 
-版本：`1.2.0`
+版本：`1.3.0`
+
+## 1.3.0
+
+- 页眉工具使用圆形悬停、展开状态；搜索框支持聚焦反馈。
+- 左侧导航采用整行点击区域、选中色块、右侧分组箭头，保留原生折叠与更多菜单。
+- 移除帖子分割线、图片描边和侧栏分隔线，改用浅色背景与留白。
+- 提供键盘焦点与减少动态效果偏好支持。
 
 ## 1.2.0
 
