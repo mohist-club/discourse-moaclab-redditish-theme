@@ -1,77 +1,104 @@
 import Component from "@glimmer/component";
 import { service } from "@ember/service";
 import { htmlSafe } from "@ember/template";
-import CategoryLogo from "discourse/components/category-logo";
+import icon from "discourse/helpers/d-icon";
+import emoji from "discourse/helpers/emoji";
+import DLightDarkImg from "discourse/ui-kit/d-light-dark-img";
 
 export default class CustomCategoryBanner extends Component {
   @service router;
 
   get category() {
-    return this.router.currentRoute?.attributes?.category;
+    if (this.args.category) {
+      return this.args.category;
+    }
+
+    let route = this.router.currentRoute;
+    while (route) {
+      if (route.attributes?.category) {
+        return route.attributes.category;
+      }
+      route = route.parent;
+    }
+    return null;
   }
 
-  get tag() {
-    return this.router.currentRoute?.attributes?.tag;
-  }
-
-  get bannerBg() {
-    return htmlSafe(
-      `background: url("${this.category.uploaded_background?.url}");
-       background-size: cover; 
-       background-position: center center;;`
+  get background() {
+    return (
+      this.category?.uploaded_background ||
+      this.category?.uploaded_background_dark
     );
   }
 
-  get categoryBgColor() {
-    return htmlSafe(
-      `background-color: var(--category-${this.category.id}-color);`
-    );
+  get logo() {
+    return this.category?.uploaded_logo || this.category?.uploaded_logo_dark;
   }
 
-  get categoryTextColor() {
-    return htmlSafe(`color: ${this.category.text_color};`);
+  get categoryStyle() {
+    const color = this.category?.color;
+    return /^[0-9a-f]{6}$/i.test(color || "")
+      ? htmlSafe(`--moaclab-category-accent: #${color};`)
+      : undefined;
   }
 
-  get categorySlug() {
-    return this.category.slug || this.generateSlug(this.category.name);
+  get categoryName() {
+    return this.category?.displayName || this.category?.name;
   }
 
-  generateSlug(name) {
-    return name
-      .toLowerCase() // Convert to lowercase
-      .replace(/\s+/g, "-") // Replace spaces with hyphens
-      .replace(/[^\w\-]+/g, "") // Remove all non-word characters
-      .replace(/\-\-+/g, "-") // Replace multiple hyphens with a single hyphen
-      .replace(/^-+/, "") // Trim hyphens from the start
-      .replace(/-+$/, ""); // Trim hyphens from the end
+  get description() {
+    return this.category?.descriptionText || this.category?.description_text;
+  }
+
+  get categoryEmoji() {
+    return this.category?.style_type === "emoji" ? this.category.emoji : null;
+  }
+
+  get categoryInitial() {
+    return Array.from(this.categoryName || "")[0];
   }
 
   <template>
     {{#if this.category}}
-      <div class="custom-category-banner">
-        {{#if this.category.uploaded_logo.url}}
-          <div
-            class="custom-category-banner_background"
-            style={{this.bannerBg}}
-          >
-            <CategoryLogo @category={{this.category}} />
-          </div>
-        {{/if}}
-        <div class="custom-category-banner_meta" style={{this.categoryBgColor}}>
-          {{#unless this.category.uploaded_logo.url}}
-            <div class="custom-category-banner_meta-text">
-              <h1>
-                <a
-                  href="/c/{{this.categorySlug}}"
-                  style={{this.categoryTextColor}}
-                >
-                  {{this.category.name}}
-                </a>
-              </h1>
-            </div>
-          {{/unless}}
+      <section
+        class="custom-category-banner moaclab-category-hero"
+        style={{this.categoryStyle}}
+        aria-label={{this.categoryName}}
+      >
+        <div class="moaclab-category-hero__cover" aria-hidden="true">
+          {{#if this.background.url}}
+            <DLightDarkImg
+              @lightImg={{this.background}}
+              @darkImg={{this.category.uploaded_background_dark}}
+              alt=""
+              loading="eager"
+            />
+          {{/if}}
         </div>
-      </div>
+
+        <div class="moaclab-category-hero__identity">
+          <div class="moaclab-category-hero__avatar" aria-hidden="true">
+            {{#if this.logo.url}}
+              <DLightDarkImg
+                @lightImg={{this.logo}}
+                @darkImg={{this.category.uploaded_logo_dark}}
+                alt=""
+              />
+            {{else if this.categoryEmoji}}
+              {{emoji this.categoryEmoji}}
+            {{else if this.category.icon}}
+              {{icon this.category.icon}}
+            {{else}}
+              <span>{{this.categoryInitial}}</span>
+            {{/if}}
+          </div>
+
+          <h1 class="moaclab-category-hero__name">{{this.categoryName}}</h1>
+        </div>
+
+        {{#if this.description}}
+          <p class="moaclab-category-hero__description">{{this.description}}</p>
+        {{/if}}
+      </section>
     {{/if}}
   </template>
 }

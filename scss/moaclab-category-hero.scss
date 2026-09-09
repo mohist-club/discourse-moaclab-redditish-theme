@@ -1,0 +1,134 @@
+.custom-category-banner.moaclab-category-hero {
+  --moaclab-category-accent: var(--moaclab-muted);
+  box-sizing: border-box;
+  width: 100%;
+  max-width: 1092px;
+  min-width: 0;
+  justify-self: center;
+  margin: 0 0 20px;
+  padding: 0;
+  border: 0;
+  background: transparent;
+
+  .moaclab-category-hero__cover {
+    height: 160px;
+    overflow: hidden;
+    border: 0;
+    border-radius: 8px;
+    background: color-mix(
+      in srgb,
+      var(--moaclab-category-accent) 16%,
+      var(--moaclab-surface)
+    );
+
+    picture,
+    img {
+      display: block;
+      width: 100%;
+      height: 100%;
+    }
+
+    img {
+      object-fit: cover;
+      object-position: center;
+    }
+  }
+
+  .moaclab-category-hero__identity {
+    position: relative;
+    display: flex;
+    align-items: flex-end;
+    gap: 16px;
+    min-width: 0;
+    margin: -32px 16px 0;
+  }
+
+  .moaclab-category-hero__avatar {
+    box-sizing: border-box;
+    display: grid;
+    place-items: center;
+    flex: 0 0 88px;
+    width: 88px;
+    height: 88px;
+    overflow: hidden;
+    border: 4px solid var(--moaclab-canvas);
+    border-radius: 50%;
+    background: var(--moaclab-surface);
+    color: var(--moaclab-category-accent);
+    font-size: 32px;
+    font-weight: 600;
+
+    picture,
+    img:not(.emoji) {
+      display: block;
+      width: 100%;
+      height: 100%;
+      object-fit: contain;
+    }
+
+    .d-icon,
+    .emoji {
+      width: 40px;
+      height: 40px;
+      margin: 0;
+      font-size: 40px;
+    }
+  }
+
+  h1.moaclab-category-hero__name {
+    min-width: 0;
+    margin: 36px 0 4px;
+    color: var(--moaclab-ink);
+    font-family: var(--heading-font-family);
+    font-size: 32px;
+    font-weight: 700;
+    line-height: 38px;
+    overflow-wrap: anywhere;
+  }
+
+  .moaclab-category-hero__description {
+    max-width: 72ch;
+    margin: 12px 16px 0;
+    color: var(--moaclab-muted);
+    font-size: 14px;
+    line-height: 20px;
+    overflow-wrap: anywhere;
+  }
+
+  @media (width <= 1200px) {
+    max-width: 756px;
+  }
+
+  @media (width <= 767px) {
+    margin-bottom: 16px;
+
+    .moaclab-category-hero__cover {
+      height: 112px;
+      border-radius: 0;
+    }
+
+    .moaclab-category-hero__identity {
+      gap: 12px;
+      margin-top: -24px;
+    }
+
+    .moaclab-category-hero__avatar {
+      flex-basis: 72px;
+      width: 72px;
+      height: 72px;
+
+      .d-icon,
+      .emoji {
+        width: 32px;
+        height: 32px;
+        font-size: 32px;
+      }
+    }
+
+    h1.moaclab-category-hero__name {
+      margin-top: 28px;
+      font-size: 24px;
+      line-height: 30px;
+    }
+  }
+}

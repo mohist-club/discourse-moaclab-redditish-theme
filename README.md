@@ -19,7 +19,18 @@ https://github.com/mohist-club/discourse-moaclab-redditish-theme.git
 - Upstream: https://github.com/discourse/discourse-redditish-theme
 - Meta topic: https://meta.discourse.org/t/-/269466
 
-版本：`1.3.1`
+版本：`1.4.0`
+
+## 1.4.0
+
+- 类别页改为社区横幅、重叠头像、名称与简介，不再因上传 Logo 隐藏名称。
+- 直接读取类别维护的背景图与 Logo，并使用原生明暗模式图片组件。
+- 无 Logo 时显示类别表情或图标，再回退到名称首字；无背景图时使用类别色浅色横幅。
+- 类别页头最大宽度 1092px，横幅桌面高 160px、手机高 112px，不修改首页和标签页。
+
+### 类别图片维护
+
+在类别的编辑设置中维护 Logo、背景图片及可选的深色版本；类别图标或表情沿用现有设置。简介来自类别介绍。维护后重新进入类别页即可读取，无需在主题中填写图片地址，也不需要附加组件。建议背景图使用至少 1600 x 320px 的横图，主体居中；Logo 使用方形图片。横幅居中裁切，Logo 完整显示。
 
 ## 1.3.1
 
