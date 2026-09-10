@@ -13,11 +13,13 @@ RSpec.describe "Topic appearance", system: true do
     expect(page).to have_css(".posts-wrapper .cooked blockquote")
 
     appearance = page.evaluate_script(<<~JS)
-      const frame = getComputedStyle(document.querySelector('.posts-wrapper'));
-      const title = getComputedStyle(document.querySelector('#topic-title'));
-      const quote = getComputedStyle(document.querySelector('.cooked blockquote'));
-      ({ border: frame.borderLeftWidth, shadow: frame.boxShadow,
-         title: title.backgroundColor, quoteBorder: quote.borderLeftWidth });
+      (() => {
+        const frame = getComputedStyle(document.querySelector('.posts-wrapper'));
+        const title = getComputedStyle(document.querySelector('#topic-title'));
+        const quote = getComputedStyle(document.querySelector('.cooked blockquote'));
+        return { border: frame.borderLeftWidth, shadow: frame.boxShadow,
+                 title: title.backgroundColor, quoteBorder: quote.borderLeftWidth };
+      })()
     JS
     expect(appearance["border"]).to eq("0px")
     expect(appearance["shadow"]).to eq("none")

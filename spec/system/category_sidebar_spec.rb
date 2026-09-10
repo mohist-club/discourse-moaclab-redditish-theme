@@ -35,10 +35,12 @@ RSpec.describe "Category sidebar", system: true do
     expect(page).to have_css(".custom-right-sidebar_subcategories")
 
     before_scroll = page.evaluate_script(<<~JS)
-      const sidebar = document.querySelector('.custom-right-sidebar');
-      ({ top: sidebar.getBoundingClientRect().top,
-         threshold: parseFloat(getComputedStyle(sidebar).top),
-         position: getComputedStyle(sidebar).position });
+      (() => {
+        const sidebar = document.querySelector('.custom-right-sidebar');
+        return { top: sidebar.getBoundingClientRect().top,
+                 threshold: parseFloat(getComputedStyle(sidebar).top),
+                 position: getComputedStyle(sidebar).position };
+      })()
     JS
     expect(before_scroll["position"]).to eq("sticky")
     expect(before_scroll["top"]).to be > before_scroll["threshold"]
