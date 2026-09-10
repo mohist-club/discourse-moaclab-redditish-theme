@@ -4,6 +4,7 @@ import { action, set } from "@ember/object";
 import { dependentKeyCompat } from "@ember/object/compat";
 import { service } from "@ember/service";
 import DButton from "discourse/components/d-button";
+import { i18n } from "discourse-i18n";
 
 export default class AddToSidebar extends Component {
   @service currentUser;
@@ -37,6 +38,12 @@ export default class AddToSidebar extends Component {
 
   get buttonIcon() {
     return this.isInSidebar ? "star" : "far-star";
+  }
+
+  get buttonLabel() {
+    return i18n(
+      themePrefix(this.isInSidebar ? "category_saved" : "category_save")
+    );
   }
 
   @action
@@ -99,6 +106,9 @@ export default class AddToSidebar extends Component {
         @action={{this.toggleInSidebar}}
         class="btn-default add-to-sidebar {{if this.isInSidebar 'in-sidebar'}}"
         @icon={{this.buttonIcon}}
+        @translatedTitle={{this.buttonLabel}}
+        @translatedLabel={{if @showLabel this.buttonLabel}}
+        aria-pressed={{if this.isInSidebar "true" "false"}}
       />
     {{/unless}}
   </template>

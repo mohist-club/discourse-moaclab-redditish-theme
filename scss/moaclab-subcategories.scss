@@ -1,4 +1,65 @@
 body:not(.admin-interface) .custom-right-sidebar {
+  .custom-right-sidebar_category-about {
+    padding: 16px;
+    border: 0;
+    border-radius: 8px;
+    background: var(--moaclab-surface);
+    box-shadow: none;
+    color: var(--moaclab-muted);
+    font-size: 14px;
+    line-height: 20px;
+    overflow-wrap: anywhere;
+  }
+
+  .moaclab-category-about__name {
+    margin: 0 0 8px;
+    color: var(--moaclab-ink);
+    font-size: 16px;
+    font-weight: 700;
+    line-height: 22px;
+  }
+
+  .moaclab-category-about__description p {
+    margin: 0 0 8px;
+    color: inherit;
+  }
+
+  .moaclab-category-about__visibility {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    margin-top: 16px;
+
+    .d-icon {
+      width: 18px;
+      height: 18px;
+    }
+  }
+
+  .moaclab-category-about__stats {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 16px;
+    margin: 16px 0 0;
+
+    > div {
+      display: flex;
+      flex-direction: column-reverse;
+    }
+
+    dt {
+      font-weight: 400;
+    }
+
+    dd {
+      margin: 0 0 2px;
+      color: var(--moaclab-ink);
+      font-size: 18px;
+      font-weight: 700;
+      line-height: 24px;
+    }
+  }
+
   .custom-right-sidebar_category-about.-tags-and-subcategories {
     padding: 16px;
     gap: 20px;

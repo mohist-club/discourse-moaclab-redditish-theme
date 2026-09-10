@@ -4,6 +4,7 @@ import { htmlSafe } from "@ember/template";
 import icon from "discourse/helpers/d-icon";
 import emoji from "discourse/helpers/emoji";
 import DLightDarkImg from "discourse/ui-kit/d-light-dark-img";
+import CategoryHeroActions from "./category-hero-actions";
 
 export default class CustomCategoryBanner extends Component {
   @service router;
@@ -93,6 +94,7 @@ export default class CustomCategoryBanner extends Component {
           </div>
 
           <h1 class="moaclab-category-hero__name">{{this.categoryName}}</h1>
+          <CategoryHeroActions @category={{this.category}} />
         </div>
 
         {{#if this.description}}

@@ -109,7 +109,96 @@ body:not(.admin-interface) :is(.sidebar-wrapper, .sidebar-hamburger-dropdown) {
   body:not(.admin-interface, .has-sidebar-page):has(
       .btn-sidebar-toggle
     )::before {
-    content: none;
+    content: "";
+    position: fixed;
+    top: var(--moaclab-header-height);
+    bottom: 0;
+    left: 31px;
+    border-right: 1px solid var(--moaclab-sidebar-divider);
+    pointer-events: none;
+  }
+}
+
+body:not(.admin-interface) :is(.sidebar-wrapper, .sidebar-hamburger-dropdown) {
+  .sidebar-section-header-wrapper {
+    display: flex;
+    align-items: center;
+    gap: 4px;
+    padding-right: 4px;
+    border-radius: 0 8px 8px 0;
+
+    &:hover,
+    &:focus-within {
+      background: var(--moaclab-surface);
+    }
+
+    .sidebar-section-header {
+      flex: 1 1 auto;
+      width: auto;
+      min-width: 0;
+      padding-right: 8px !important;
+
+      &:hover {
+        background: transparent;
+      }
+    }
+
+    .sidebar-section-header-text {
+      overflow: hidden;
+      text-overflow: ellipsis;
+      white-space: nowrap;
+    }
+
+    .sidebar-section-header-global-indicator {
+      order: 1;
+      flex: 0 0 auto;
+      margin: 0 8px;
+
+      .d-icon {
+        width: 12px;
+        height: 12px;
+        color: var(--moaclab-muted);
+      }
+    }
+
+    .sidebar-section-header-caret {
+      order: 2;
+      display: grid;
+      place-items: center;
+
+      .d-icon {
+        width: 16px;
+        height: 16px;
+        color: var(--moaclab-muted);
+      }
+    }
+
+    .sidebar-section-header-button,
+    .sidebar-section-header-dropdown {
+      position: static;
+      display: grid;
+      place-items: center;
+      flex: 0 0 28px;
+      width: 28px;
+      min-width: 28px;
+      height: 28px;
+      padding: 0;
+      border: 0;
+      border-radius: 50%;
+      background: transparent;
+      color: var(--moaclab-muted);
+
+      .d-icon {
+        width: 14px;
+        height: 14px;
+      }
+
+      &:hover,
+      &:focus-visible {
+        background: var(--moaclab-pill);
+        color: var(--moaclab-ink);
+      }
+    }
   }
 }
 

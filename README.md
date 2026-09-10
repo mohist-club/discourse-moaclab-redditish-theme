@@ -19,7 +19,15 @@ https://github.com/mohist-club/discourse-moaclab-redditish-theme.git
 - Upstream: https://github.com/discourse/discourse-redditish-theme
 - Meta topic: https://meta.discourse.org/t/-/269466
 
-版本：`1.6.1`
+版本：`1.7.0`
+
+## 1.7.0
+
+- 根据新的参考图，恢复桌面收起态的细竖线，32px 原生展开按钮仍在分割线上。
+- 类别名称右侧显示原生发帖、通知、收藏与更多菜单，窄屏自动换行。
+- 更多菜单使用 Discourse 原生浮层，提供类别介绍与 RSS 订阅入口。
+- 桌面简介归入右栏浅灰介绍区，显示真实话题数、帖子数与公开状态；小屏保留页头简介。
+- 侧栏分组标题、公开标记、折叠箭头与编辑按钮统一排版和悬停底色，保留原生权限与交互。
 
 ## 1.6.1
 

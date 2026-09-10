@@ -21,7 +21,8 @@ RSpec.describe "Category hero", system: true do
     ).to eq(160)
     expect(page).to have_css(".moaclab-category-hero__avatar .d-icon-palette")
     expect(page).to have_css(".moaclab-category-hero__name", text: category.name)
-    expect(page).to have_css(".moaclab-category-hero__description", text: "Keycap collections")
+    expect(page).to have_no_css(".moaclab-category-hero__description")
+    expect(page).to have_css(".moaclab-category-about__description", text: "Keycap collections")
   end
 
   it "keeps the name visible when a logo is maintained" do
@@ -67,5 +68,46 @@ RSpec.describe "Category hero", system: true do
     visit("/latest")
 
     expect(page).to have_no_css(".moaclab-category-hero")
+  end
+
+  it "opens a native more menu and keeps the description visible on narrow screens" do
+    category.update!(description: "Keycap collections")
+    visit("/c/#{category.slug}/#{category.id}")
+
+    find(".moaclab-category-more").click
+    expect(page).to have_css(".moaclab-category-menu a[href$='.rss']")
+    page.send_keys(:escape)
+    expect(page).to have_no_css(".moaclab-category-menu")
+
+    page.current_window.resize_to(390, 844)
+    expect(page).to have_css(".moaclab-category-hero__description", text: "Keycap collections")
+    expect(page).to have_css(".moaclab-category-more")
+    expect(
+      page.evaluate_script("document.documentElement.scrollWidth <= window.innerWidth"),
+    ).to eq(true)
+  end
+
+  it "uses native creation, notification and saved-category actions in the hero" do
+    user = Fabricate(:user)
+    sign_in(user)
+    visit("/c/#{category.slug}/#{category.id}")
+
+    expect(page).to have_css(".moaclab-category-hero__actions .moaclab-category-create")
+    expect(page).to have_no_css(".custom-right-sidebar_category-about .category-notifications-button")
+    find(".moaclab-category-hero__actions .category-notifications-button").click
+    expect(page).to have_css(".category-notifications-button.is-expanded")
+    page.send_keys(:escape)
+
+    saved_button = find(".moaclab-category-hero__actions .add-to-sidebar")
+    saved_before = saved_button["aria-pressed"] == "true"
+    saved_button.click
+    expect(page).to have_css(".add-to-sidebar[aria-pressed='#{!saved_before}']")
+    try_until_success do
+      expect(user.reload.sidebar_category_ids.include?(category.id)).to eq(!saved_before)
+    end
+
+    find(".moaclab-category-create").click
+    expect(page).to have_css("#reply-control.open")
+    expect(page).to have_css("#reply-control .category-input .selected-name", text: category.name)
   end
 end
