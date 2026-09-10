@@ -59,6 +59,7 @@ RSpec.describe "Sidebar navigation appearance", system: true do
     expect(page).to have_css(".btn-sidebar-toggle[aria-expanded='false']")
     expect(bounds(".btn-sidebar-toggle")["x"]).to eq(16)
     expect(bounds(".btn-sidebar-toggle")["y"]).to eq(68)
+    expect(page.evaluate_script("getComputedStyle(document.body, '::before').content")).to eq("none")
     expect(bounds(".home-logo-wrapper-outlet")["x"]).to eq(16)
 
     find(".btn-sidebar-toggle").click

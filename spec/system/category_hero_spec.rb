@@ -6,12 +6,19 @@ RSpec.describe "Category hero", system: true do
   fab!(:category) { Fabricate(:category, name: "Keycaps", icon: "palette") }
   fab!(:upload)
 
+  before { page.current_window.resize_to(1440, 1000) }
+
   it "shows a background without requiring a logo" do
     category.update!(uploaded_background: upload, description: "Keycap collections")
 
     visit("/c/#{category.slug}/#{category.id}")
 
     expect(page).to have_css(".moaclab-category-hero__cover img")
+    expect(
+      page.evaluate_script(
+        "document.querySelector('.moaclab-category-hero__cover').getBoundingClientRect().height",
+      ),
+    ).to eq(160)
     expect(page).to have_css(".moaclab-category-hero__avatar .d-icon-palette")
     expect(page).to have_css(".moaclab-category-hero__name", text: category.name)
     expect(page).to have_css(".moaclab-category-hero__description", text: "Keycap collections")
@@ -25,6 +32,18 @@ RSpec.describe "Category hero", system: true do
     expect(page).to have_css(".moaclab-category-hero__avatar img")
     expect(page).to have_no_css(".moaclab-category-hero__cover img")
     expect(page).to have_css(".moaclab-category-hero__name", text: category.name)
+    expect(
+      page.evaluate_script(
+        "document.querySelector('.moaclab-category-hero__cover').getBoundingClientRect().height",
+      ),
+    ).to eq(64)
+
+    page.current_window.resize_to(390, 844)
+    expect(
+      page.evaluate_script(
+        "document.querySelector('.moaclab-category-hero__cover').getBoundingClientRect().height",
+      ),
+    ).to eq(48)
   end
 
   it "uses dark-only images when no light variant exists" do

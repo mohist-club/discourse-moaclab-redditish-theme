@@ -106,17 +106,10 @@ body:not(.admin-interface) :is(.sidebar-wrapper, .sidebar-hamburger-dropdown) {
     --moaclab-sidebar-toggle-left: calc(var(--d-sidebar-width) - 16px);
   }
 
-  // The native toggle stays below the header even when the drawer is closed.
   body:not(.admin-interface, .has-sidebar-page):has(
       .btn-sidebar-toggle
     )::before {
-    content: "";
-    position: fixed;
-    top: var(--moaclab-header-height);
-    bottom: 0;
-    left: 31px;
-    border-right: 1px solid var(--moaclab-sidebar-divider);
-    pointer-events: none;
+    content: none;
   }
 }
 

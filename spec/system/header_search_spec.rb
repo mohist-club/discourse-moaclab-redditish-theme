@@ -34,6 +34,21 @@ RSpec.describe "Header search compatibility", system: true do
 
     fill_in("header-search-input", with: "keyboard")
     expect(page).to have_css(".search-menu-panel")
+    expect(
+      page.evaluate_script(
+        "getComputedStyle(document.querySelector('#header-search-input').parentElement).outlineStyle",
+      ),
+    ).to eq("none")
+    expect(
+      page.evaluate_script(
+        "getComputedStyle(document.querySelector('#header-search-input')).outlineStyle",
+      ),
+    ).to eq("none")
+    expect(
+      page.evaluate_script(
+        "getComputedStyle(document.querySelector('#header-search-input').closest('.search-input-wrapper')).boxShadow",
+      ),
+    ).not_to eq("none")
 
     page.execute_script(
       "document.querySelector('.d-header .contents > .floating-search-input-wrapper').remove()",

@@ -19,7 +19,13 @@ https://github.com/mohist-club/discourse-moaclab-redditish-theme.git
 - Upstream: https://github.com/discourse/discourse-redditish-theme
 - Meta topic: https://meta.discourse.org/t/-/269466
 
-版本：`1.6.0`
+版本：`1.6.1`
+
+## 1.6.1
+
+- 搜索聚焦只保留外层圆角高亮，移除内层原生方框，保留键盘焦点提示。
+- 收起侧栏后不再绘制竖向分割线，原生展开按钮仍保留在左侧。
+- 未维护背景图的类别横幅缩小为桌面 64px、手机 48px，已上传背景图仍使用 160px / 112px。
 
 ## 1.6.0
 

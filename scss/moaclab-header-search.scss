@@ -51,6 +51,13 @@ body:not(.admin-interface) .d-header {
       background: transparent;
       box-shadow: none;
 
+      // The wrapper provides the keyboard focus ring; avoid the core inner ring.
+      &:focus-within {
+        outline: none;
+        border-radius: 24px;
+        box-shadow: none;
+      }
+
       .search-term__input {
         box-sizing: border-box;
         flex: 1 1 0;
@@ -66,6 +73,12 @@ body:not(.admin-interface) .d-header {
         background: transparent;
         box-shadow: none;
         font: 14px / 20px var(--font-family);
+
+        &:focus,
+        &:focus-visible {
+          outline: none;
+          box-shadow: none;
+        }
 
         &::placeholder {
           color: var(--moaclab-muted);

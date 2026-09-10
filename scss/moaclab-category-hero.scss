@@ -21,6 +21,10 @@
       var(--moaclab-surface)
     );
 
+    &:not(:has(img)) {
+      height: 64px;
+    }
+
     picture,
     img {
       display: block;
@@ -105,6 +109,10 @@
     .moaclab-category-hero__cover {
       height: 112px;
       border-radius: 0;
+
+      &:not(:has(img)) {
+        height: 48px;
+      }
     }
 
     .moaclab-category-hero__identity {
