@@ -46,11 +46,13 @@ RSpec.describe "Sidebar navigation appearance", system: true do
     ).to eq(32)
 
     find(".btn-sidebar-toggle").click
-    expect(page).to have_no_css(".sidebar-wrapper")
+    expect(page).to have_no_css("body.has-sidebar-page")
+    expect(page).to have_no_css(".sidebar-wrapper .sidebar-section-link")
     expect(page).to have_css(".btn-sidebar-toggle[aria-expanded='false']")
 
     find(".btn-sidebar-toggle").click
-    expect(page).to have_css(".sidebar-wrapper")
+    expect(page).to have_css("body.has-sidebar-page")
+    expect(page).to have_css(".sidebar-wrapper .sidebar-section-link")
     expect(page).to have_css(".btn-sidebar-toggle[aria-expanded='true']")
   end
 
