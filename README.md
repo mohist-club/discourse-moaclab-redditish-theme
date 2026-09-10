@@ -19,7 +19,18 @@ https://github.com/mohist-club/discourse-moaclab-redditish-theme.git
 - Upstream: https://github.com/discourse/discourse-redditish-theme
 - Meta topic: https://meta.discourse.org/t/-/269466
 
-版本：`1.8.1`
+版本：`1.9.0`
+
+## 1.9.0
+
+- 首页右栏增加社区积分榜，直接读取已有榜单的头像、用户名、积分和真实名次，保留并列排名。
+- 仅在 `top_menu` 配置的默认首页路由显示，不在其他列表、类别、标签或话题详情页显示。
+- `homepage_leaderboard_enabled`：显示开关，默认开启。
+- `homepage_leaderboard_id`：榜单 ID，默认 `1`，对应 `/leaderboard/1`。
+- `homepage_leaderboard_count`：展示人数，默认 `5`，范围 `1–10`。
+- 沿用榜单默认周期，不伪造周榜或类别榜；底部链接进入完整榜单。
+- 数据在内存中按账号和榜单缓存 5 分钟，不写入本地持久存储；空榜、权限不足、未安装积分榜功能或请求失败时隐藏模块。
+- 小屏沿用主题原本的右栏隐藏规则，不额外挤压主内容。
 
 ## 1.8.1
 

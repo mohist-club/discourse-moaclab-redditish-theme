@@ -22,3 +22,7 @@ zh_CN:
   category_private: "受限类别"
   category_topics: "话题"
   category_posts: "帖子"
+  leaderboard_title: "社区积分榜"
+  leaderboard_score: "积分"
+  leaderboard_rank: "第 %{rank} 名"
+  leaderboard_view_all: "查看完整榜单"

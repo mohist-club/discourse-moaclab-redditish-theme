@@ -18,6 +18,9 @@ acceptance("Redditish Theme | recent topics sidebar", function (needs) {
   needs.user({ sidebar_tags: [], sidebar_category_ids: [] });
 
   needs.pretender((server, helper) => {
+    server.get("/leaderboard/1.json", () =>
+      helper.response({ leaderboard: { id: 1 }, users: [] })
+    );
     readRequests = 0;
     readResponse = topicListResponse();
 

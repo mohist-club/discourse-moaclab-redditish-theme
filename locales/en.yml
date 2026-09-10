@@ -22,3 +22,7 @@ en:
   category_private: "Restricted"
   category_topics: "Topics"
   category_posts: "Posts"
+  leaderboard_title: "Community leaderboard"
+  leaderboard_score: "Points"
+  leaderboard_rank: "Rank %{rank}"
+  leaderboard_view_all: "View full leaderboard"

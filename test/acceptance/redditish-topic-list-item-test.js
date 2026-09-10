@@ -8,6 +8,9 @@ acceptance("Redditish Theme | custom topic list item", function (needs) {
   needs.user({ sidebar_tags: [], sidebar_category_ids: [] });
 
   needs.pretender((server, helper) => {
+    server.get("/leaderboard/1.json", () =>
+      helper.response({ leaderboard: { id: 1 }, users: [] })
+    );
     server.get("/latest.json", () => {
       const response = cloneJSON(discoveryFixture["/latest.json"]);
 

@@ -6,6 +6,27 @@ show_like_count:
   default: true
   description: "Shows the like count before the reply count in the topic list"
 
+homepage_leaderboard_enabled:
+  default: true
+  description:
+    en: "Show the community leaderboard in the right sidebar on the configured homepage only."
+    zh_CN: "仅在配置的首页右侧显示社区积分榜，类别、标签和其他列表页不显示。"
+
+homepage_leaderboard_id:
+  default: 1
+  min: 1
+  description:
+    en: "Leaderboard ID, for example 1 for /leaderboard/1. Requires an existing accessible leaderboard."
+    zh_CN: "积分榜 ID，例如 /leaderboard/1 填写 1。需要站点已有可访问的积分榜。"
+
+homepage_leaderboard_count:
+  default: 5
+  min: 1
+  max: 10
+  description:
+    en: "Number of members to display (1-10). Tied ranks follow the source leaderboard."
+    zh_CN: "展示人数（1–10），并列名次与原积分榜一致。"
+
 svg_icons:
   default: "far-heart|far-comment|far-share-from-square|ellipsis|circle-info|rss|star|far-star"
   type: list
