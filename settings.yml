@@ -7,6 +7,6 @@ show_like_count:
   description: "Shows the like count before the reply count in the topic list"
 
 svg_icons:
-  default: "far-heart|far-comment|far-share-from-square"
+  default: "far-heart|far-comment|far-share-from-square|ellipsis|circle-info|rss|star|far-star"
   type: list
   list_type: compact

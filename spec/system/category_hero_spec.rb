@@ -82,9 +82,8 @@ RSpec.describe "Category hero", system: true do
     page.current_window.resize_to(390, 844)
     expect(page).to have_css(".moaclab-category-hero__description", text: "Keycap collections")
     expect(page).to have_css(".moaclab-category-more")
-    expect(
-      page.evaluate_script("document.documentElement.scrollWidth <= window.innerWidth"),
-    ).to eq(true)
+    fits_viewport = page.evaluate_script("document.documentElement.scrollWidth <= window.innerWidth")
+    expect(fits_viewport).to eq(true)
   end
 
   it "uses native creation, notification and saved-category actions in the hero" do
@@ -93,7 +92,8 @@ RSpec.describe "Category hero", system: true do
     visit("/c/#{category.slug}/#{category.id}")
 
     expect(page).to have_css(".moaclab-category-hero__actions .moaclab-category-create")
-    expect(page).to have_no_css(".custom-right-sidebar_category-about .category-notifications-button")
+    old_controls = ".custom-right-sidebar_category-about .category-notifications-button"
+    expect(page).to have_no_css(old_controls)
     find(".moaclab-category-hero__actions .category-notifications-button").click
     expect(page).to have_css(".category-notifications-button.is-expanded")
     page.send_keys(:escape)
@@ -103,11 +103,12 @@ RSpec.describe "Category hero", system: true do
     saved_button.click
     expect(page).to have_css(".add-to-sidebar[aria-pressed='#{!saved_before}']")
     try_until_success do
-      expect(user.reload.sidebar_category_ids.include?(category.id)).to eq(!saved_before)
+      saved_ids = user.secured_sidebar_category_ids
+      expect(saved_ids.include?(category.id)).to eq(!saved_before)
     end
 
     find(".moaclab-category-create").click
     expect(page).to have_css("#reply-control.open")
-    expect(page).to have_css("#reply-control .category-input .selected-name", text: category.name)
+    expect(page).to have_css("#reply-control .category-chooser .selected-name", text: category.name)
   end
 end
