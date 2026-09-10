@@ -1,0 +1,131 @@
+// Keep native selected glyphs; swap only known neutral navigation icons.
+$moaclab-sidebar-icons: (
+  ("house", "home", "house-chimney"): $sidebar-house,
+  ("chart-line", "arrow-trend-up", "fire"): $sidebar-trending-up,
+  ("newspaper", "far-newspaper"): $sidebar-newspaper,
+  ("clock", "far-clock"): $sidebar-clock,
+  ("bell", "far-bell"): $sidebar-bell,
+  ("bookmark", "far-bookmark"): $sidebar-bookmark,
+  ("users", "user-group"): $sidebar-users,
+  ("tag", "tags"): $sidebar-tag,
+  ("cube", "cubes"): $sidebar-box,
+  ("anchor"): $sidebar-anchor,
+  ("palette"): $sidebar-palette,
+  ("keyboard", "far-keyboard"): $sidebar-keyboard,
+  ("briefcase"): $sidebar-briefcase,
+  ("circle-question", "question-circle"): $sidebar-circle-help,
+  ("list", "layer-group"): $sidebar-list,
+  ("globe", "discourse-add-translation"): $sidebar-globe,
+  ("robot", "far-discobot"): $sidebar-bot,
+  ("comment", "comments", "far-comment", "comment-dots"):
+    $sidebar-message-circle,
+  ("calendar-days", "calendar", "far-calendar"): $sidebar-calendar-days,
+  ("gear", "sliders"): $sidebar-settings,
+  ("magnifying-glass"): $sidebar-search,
+  ("folder", "folder-open"): $sidebar-folder-open,
+  ("heart", "far-heart"): $sidebar-heart,
+);
+
+body:not(.admin-interface) :is(.sidebar-wrapper, .sidebar-hamburger-dropdown) {
+  .sidebar-section-link-prefix {
+    position: relative;
+  }
+
+  @each $names, $asset in $moaclab-sidebar-icons {
+    @each $name in $names {
+      .sidebar-section-link-prefix:has(.d-icon-#{$name}) {
+        &::before {
+          content: "";
+          position: absolute;
+          inset: 0;
+          background: var(--moaclab-sidebar-ink);
+          mask: url($asset) center / 20px 20px no-repeat;
+          pointer-events: none;
+        }
+
+        .d-icon {
+          visibility: hidden;
+        }
+      }
+    }
+  }
+
+  .sidebar-section-link:is(.active, .exact-url-match, [aria-current="page"]) {
+    .sidebar-section-link-prefix {
+      &::before {
+        display: none;
+      }
+
+      .d-icon {
+        visibility: visible;
+        color: var(--moaclab-sidebar-ink);
+      }
+    }
+  }
+}
+
+@media (width >= 768px) {
+  body:not(.admin-interface).has-sidebar-page .d-header {
+    .header-sidebar-toggle {
+      display: contents;
+    }
+
+    .header-sidebar-toggle .btn-sidebar-toggle {
+      box-sizing: border-box;
+      position: fixed;
+      top: calc(var(--moaclab-header-height) + 12px);
+      left: calc(var(--d-sidebar-width) - 16px);
+      width: 32px;
+      min-width: 32px;
+      height: 32px;
+      border: 1px solid var(--moaclab-muted);
+      border-radius: 50%;
+      background: var(--moaclab-canvas);
+      color: var(--moaclab-sidebar-ink);
+      box-shadow: 0 1px 4px rgb(0 0 0 / 16%);
+
+      &::before {
+        content: "";
+        width: 20px;
+        height: 20px;
+        background: currentcolor;
+        mask: url($sidebar-menu) center / contain no-repeat;
+      }
+
+      .d-icon {
+        display: none;
+      }
+
+      &:hover {
+        background: var(--moaclab-sidebar-active);
+      }
+    }
+  }
+}
+
+body:not(.admin-interface) .hamburger-panel:has(.sidebar-hamburger-dropdown) {
+  .menu-panel {
+    box-sizing: border-box;
+    width: var(--d-sidebar-width);
+    max-width: calc(100vw - 48px);
+    padding: 0;
+    border: 0;
+    border-right: 1px solid var(--moaclab-sidebar-divider);
+    border-radius: 0;
+    background: var(--moaclab-canvas);
+    box-shadow: 4px 0 16px rgb(0 0 0 / 8%);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  body:not(.admin-interface) .sidebar-wrapper,
+  body:not(.admin-interface) .hamburger-panel:has(.sidebar-hamburger-dropdown) {
+    animation: none !important;
+    transition: none !important;
+
+    .menu-panel {
+      animation: none !important;
+      transition: none !important;
+    }
+  }
+}

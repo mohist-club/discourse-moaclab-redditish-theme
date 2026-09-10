@@ -7,7 +7,7 @@
 }
 
 body:not(.admin-interface) {
-  --d-sidebar-width: 272px;
+  --d-sidebar-width: 248px;
   --moaclab-header-height: 56px;
   --font-family:
     "Reddit Sans", -apple-system, blinkmacsystemfont, "Segoe UI", "PingFang SC",
@@ -21,7 +21,7 @@ body:not(.admin-interface) {
 
 body.tags-page,
 body[class*="navigation-"]:not([class*="archetype-"]) {
-  --d-sidebar-width: 272px;
+  --d-sidebar-width: 248px;
 
   // Keep the native header search, while removing the duplicate welcome search.
   &.search-header--visible .welcome-banner {
@@ -335,7 +335,7 @@ body:not(.admin-interface) :is(.sidebar-wrapper, .sidebar-hamburger-dropdown) {
   }
 
   .sidebar-sections {
-    padding: 12px 16px;
+    padding: 8px 24px 12px 0;
   }
 
   .sidebar-section-wrapper {
@@ -359,16 +359,18 @@ body:not(.admin-interface) :is(.sidebar-wrapper, .sidebar-hamburger-dropdown) {
     box-sizing: border-box;
     display: flex;
     align-items: center;
+    column-gap: 0;
     width: 100%;
     height: 40px;
     min-height: 40px;
     padding: 10px 16px !important;
     border: 0;
-    border-radius: 8px;
+    border-radius: 0 8px 8px 0;
     box-shadow: none;
-    color: var(--moaclab-ink);
+    color: var(--moaclab-sidebar-ink);
     background: transparent;
     font-size: 14px;
+    font-weight: 400;
     line-height: 20px;
     text-decoration: none;
 
@@ -381,9 +383,9 @@ body:not(.admin-interface) :is(.sidebar-wrapper, .sidebar-hamburger-dropdown) {
     &.exact-url-match,
     &[aria-current="page"],
     &.sidebar-more-section-trigger[aria-expanded="true"] {
-      background: var(--moaclab-pill);
-      color: var(--moaclab-ink);
-      font-weight: 600;
+      background: var(--moaclab-sidebar-active);
+      color: var(--moaclab-sidebar-ink);
+      font-weight: 400;
 
       &:hover {
         background: var(--moaclab-pill-hover);
@@ -465,7 +467,7 @@ body:not(.admin-interface) :is(.sidebar-wrapper, .sidebar-hamburger-dropdown) {
     position: sticky;
     top: var(--moaclab-header-height);
     height: calc(100dvh - var(--moaclab-header-height));
-    border-right: 1px solid var(--moaclab-line);
+    border-right: 1px solid var(--moaclab-sidebar-divider);
     overscroll-behavior-y: contain;
 
     .sidebar-container {

@@ -19,7 +19,17 @@ https://github.com/mohist-club/discourse-moaclab-redditish-theme.git
 - Upstream: https://github.com/discourse/discourse-redditish-theme
 - Meta topic: https://meta.discourse.org/t/-/269466
 
-版本：`1.4.0`
+版本：`1.5.0`
+
+## 1.5.0
+
+- 普通导航图标默认使用随主题打包的 Lucide 线框图标；选中后恢复原生实心图标，无需脚本替换 DOM。
+- 品牌图标、上传图片、表情及未映射的自定义图标保留原样，不影响类别页头或帖子工具栏。
+- 侧栏宽 248px，导航行高 40px、图标 20px，选中浅灰底贴左并保留右侧圆角，文字不再额外加粗。
+- 桌面原生收起按钮移到侧栏边界，尺寸 32px；收起后回到页眉，支持再次展开。
+- 手机抽屉同步窄宽度和选中样式，保留原生遮罩、分组折叠，补上调用原生关闭动作的 Esc 快捷键和焦点恢复。
+
+图标素材来自 lucide-static 0.468.0，许可保留于 `assets/sidebar/LICENSE`。
 
 ## 1.4.0
 
