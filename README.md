@@ -19,7 +19,14 @@ https://github.com/mohist-club/discourse-moaclab-redditish-theme.git
 - Upstream: https://github.com/discourse/discourse-redditish-theme
 - Meta topic: https://meta.discourse.org/t/-/269466
 
-版本：`1.8.0`
+版本：`1.8.1`
+
+## 1.8.1
+
+- 侧栏导航左右留白，选中和悬停底色统一为四角圆角。
+- 工具、类别、标签、频道等带标题的分组增加细分割线。
+- 折叠箭头固定在整行最右侧，编辑和更多按钮位于其左侧，不再改变箭头位置。
+- 保留原生分组折叠、编辑权限、键盘焦点及移动端抽屉交互。
 
 ## 1.8.0
 

@@ -89,4 +89,56 @@ RSpec.describe "Sidebar navigation appearance", system: true do
     expect(page).to have_no_css("html.scroll-lock")
     expect(page).to have_css("#toggle-hamburger-menu:focus")
   end
+
+  it "insets rounded selected rows and separates titled sections" do
+    visit("/c/#{category.slug}/#{category.id}")
+    expect(page).to have_css(".sidebar-wrapper .sidebar-section-link.active")
+
+    appearance = page.evaluate_script(<<~JS)
+      (() => {
+        const sidebar = document.querySelector('.sidebar-wrapper');
+        const selected = sidebar.querySelector('.sidebar-section-link.active');
+        const style = getComputedStyle(selected);
+        const sections = [...sidebar.querySelectorAll('.sidebar-section-header-wrapper')];
+        return {
+          inset: selected.getBoundingClientRect().left - sidebar.getBoundingClientRect().left,
+          radius: [style.borderTopLeftRadius, style.borderBottomLeftRadius,
+                   style.borderTopRightRadius, style.borderBottomRightRadius],
+          dividers: sections.map(row => getComputedStyle(row.parentElement).borderTopWidth)
+        };
+      })()
+    JS
+    expect(appearance["inset"]).to be >= 12
+    expect(appearance["radius"]).to eq(%w[8px 8px 8px 8px])
+    expect(appearance["dividers"]).to all(eq("1px"))
+  end
+
+  it "aligns carets at the right edge without blocking native admin controls" do
+    sign_in(Fabricate(:admin))
+    visit("/latest")
+    expect(page).to have_css(".sidebar-section-header-button", visible: :all)
+
+    layout = page.evaluate_script(<<~JS)
+      (() => {
+        const rows = [...document.querySelectorAll('.sidebar-wrapper .sidebar-section-header-wrapper')];
+        return rows.filter(row => row.querySelector('.sidebar-section-header-caret')).map(row => {
+          const caret = row.querySelector('.sidebar-section-header-caret').getBoundingClientRect();
+          const actions = row.querySelectorAll('.sidebar-section-header-button, .sidebar-section-header-dropdown');
+          return {
+            inset: row.getBoundingClientRect().right - caret.right,
+            overlap: [...actions].some(button => button.getBoundingClientRect().right > caret.left)
+          };
+        });
+      })()
+    JS
+    expect(layout).not_to be_empty
+    expect(layout.map { |row| row["inset"] }).to all(be_within(1).of(8))
+    expect(layout.map { |row| row["overlap"] }).to all(eq(false))
+
+    section = ".sidebar-wrapper [data-section-name='categories']"
+    find("#{section} .sidebar-section-header-caret").click
+    expect(page).to have_css("#{section} .sidebar-section-header[aria-expanded='false']")
+    find("#{section} .sidebar-section-header-caret").click
+    expect(page).to have_css("#{section} .sidebar-section-header[aria-expanded='true']")
+  end
 end
