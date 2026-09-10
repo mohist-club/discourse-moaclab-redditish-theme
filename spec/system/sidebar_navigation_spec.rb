@@ -6,7 +6,7 @@ RSpec.describe "Sidebar navigation appearance", system: true do
   fab!(:category) { Fabricate(:category, name: "Keycaps", icon: "palette", style_type: "icon") }
 
   before do
-    SiteSetting.default_sidebar_categories = category.id.to_s
+    SiteSetting.default_navigation_menu_categories = category.id.to_s
     page.current_window.resize_to(1440, 1000)
   end
 
