@@ -19,7 +19,15 @@ https://github.com/mohist-club/discourse-moaclab-redditish-theme.git
 - Upstream: https://github.com/discourse/discourse-redditish-theme
 - Meta topic: https://meta.discourse.org/t/-/269466
 
-版本：`1.5.0`
+版本：`1.6.0`
+
+## 1.6.0
+
+- 桌面侧栏收起后保留左侧窄边栏，原生展开按钮始终位于页眉下方，不再回到 Logo 旁边。
+- 清理桌面 Logo 前的菜单占位，展开和收起时保持 16px 左边距。
+- 原生与旧版页眉搜索同时存在时优先显示原生搜索；旧版单独启用时仍保留，统一输入框与搜索结果面板样式。
+- 右侧子类别采用整行悬停、统一图标容器和紧凑排版，长名称自然换行，保留原生导航。
+- 保留手机端原生搜索入口、抽屉与遮罩交互。
 
 ## 1.5.0
 

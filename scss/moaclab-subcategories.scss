@@ -1,0 +1,111 @@
+body:not(.admin-interface) .custom-right-sidebar {
+  .custom-right-sidebar_category-about.-tags-and-subcategories {
+    padding: 16px;
+    gap: 20px;
+    border: 0;
+    border-radius: 8px;
+    background: var(--moaclab-surface);
+  }
+
+  .custom-right-sidebar_subcategories {
+    display: flex;
+    flex-direction: column;
+    gap: 2px;
+
+    h4 {
+      margin: 0 8px 8px;
+      color: var(--moaclab-muted);
+      font-size: 12px;
+      font-weight: 600;
+      line-height: 16px;
+    }
+
+    > .badge-category__wrapper {
+      box-sizing: border-box;
+      display: flex;
+      align-items: center;
+      width: 100%;
+      min-width: 0;
+      min-height: 48px;
+      margin: 0;
+      padding: 8px;
+      border: 0;
+      border-radius: 8px;
+      color: var(--moaclab-ink);
+      background: transparent;
+      text-decoration: none;
+
+      &:hover {
+        background: var(--moaclab-pill);
+      }
+
+      &:focus-visible {
+        outline: 2px solid var(--moaclab-muted);
+        outline-offset: -2px;
+      }
+
+      .badge-category {
+        display: flex;
+        align-items: center;
+        gap: 12px;
+        width: 100%;
+        min-width: 0;
+        color: inherit;
+        background: transparent;
+
+        .d-icon,
+        .emoji {
+          box-sizing: border-box;
+          flex: 0 0 32px;
+          width: 32px;
+          height: 32px;
+          margin: 0;
+          padding: 7px;
+          border-radius: 50%;
+          background: var(--moaclab-pill);
+          color: var(--moaclab-muted);
+        }
+      }
+
+      .badge-category__name {
+        min-width: 0;
+        overflow-wrap: anywhere;
+        white-space: normal;
+        color: inherit;
+        font-size: 14px;
+        line-height: 20px;
+        font-weight: 600;
+      }
+    }
+  }
+
+  .custom-right-sidebar_tags {
+    h4 {
+      margin: 0 8px 12px;
+      font-size: 12px;
+      line-height: 16px;
+      color: var(--moaclab-muted);
+    }
+
+    .discourse-tags {
+      gap: 6px;
+    }
+
+    .discourse-tag.simple {
+      max-width: 100%;
+      padding: 4px 10px;
+      border: 0;
+      border-radius: 16px;
+      background: var(--moaclab-pill);
+      color: var(--moaclab-muted);
+      font-size: 12px;
+      line-height: 18px;
+      overflow-wrap: anywhere;
+
+      &:hover {
+        color: var(--moaclab-ink);
+        background: var(--moaclab-pill-hover);
+      }
+    }
+  }
+}
