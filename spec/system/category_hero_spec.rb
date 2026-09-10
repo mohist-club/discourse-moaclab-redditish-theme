@@ -82,8 +82,8 @@ RSpec.describe "Category hero", system: true do
     page.current_window.resize_to(390, 844)
     expect(page).to have_css(".moaclab-category-hero__description", text: "Keycap collections")
     expect(page).to have_css(".moaclab-category-more")
-    fits_viewport = page.evaluate_script("document.documentElement.scrollWidth <= window.innerWidth")
-    expect(fits_viewport).to eq(true)
+    fits = page.evaluate_script("document.documentElement.scrollWidth <= window.innerWidth")
+    expect(fits).to eq(true)
   end
 
   it "uses native creation, notification and saved-category actions in the hero" do
