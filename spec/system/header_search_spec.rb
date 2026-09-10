@@ -2,17 +2,19 @@
 
 RSpec.describe "Header search compatibility", system: true do
   let!(:theme) { upload_theme }
+  fab!(:category) { Fabricate(:category, name: "Keyboard collections") }
 
   before do
+    search_settings = { theme_id: theme.id, name: "search_experience", value: "search_field" }
     Themes::ThemeSiteSettingManager.call(
       guardian: Fabricate(:admin).guardian,
-      params: { theme_id: theme.id, name: "search_experience", value: "search_field" },
+      params: search_settings,
     )
     page.current_window.resize_to(1440, 1000)
   end
 
   it "keeps one search field when a legacy connector is also installed" do
-    visit("/latest")
+    visit("/c/#{category.slug}/#{category.id}")
     expect(page).to have_css("#header-search-input")
 
     page.execute_script(<<~JS)
@@ -41,7 +43,7 @@ RSpec.describe "Header search compatibility", system: true do
 
   it "keeps the search inside the viewport on narrow desktop screens" do
     page.current_window.resize_to(1024, 900)
-    visit("/latest")
+    visit("/c/#{category.slug}/#{category.id}")
     expect(page).to have_css("#header-search-input")
     expect(page.evaluate_script("document.documentElement.scrollWidth <= innerWidth")).to eq(true)
     expect(
