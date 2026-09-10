@@ -63,6 +63,10 @@ RSpec.describe "Sidebar navigation appearance", system: true do
     expect(divider_content).to eq('""')
     divider_left = page.evaluate_script("getComputedStyle(document.body, '::before').left")
     expect(divider_left).to eq("31px")
+    divider_z = page.evaluate_script("getComputedStyle(document.body, '::before').zIndex")
+    expect(divider_z.to_i).to be > 0
+    divider_height = page.evaluate_script("getComputedStyle(document.body, '::before').height")
+    expect(divider_height).to eq("944px")
     expect(bounds(".home-logo-wrapper-outlet")["x"]).to eq(16)
 
     find(".btn-sidebar-toggle").click

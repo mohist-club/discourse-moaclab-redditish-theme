@@ -17,6 +17,14 @@ RSpec.describe "Header search compatibility", system: true do
     visit("/c/#{category.slug}/#{category.id}")
     expect(page).to have_css("#header-search-input")
 
+    search_style = page.evaluate_script(<<~JS)
+      const input = document.querySelector('#header-search-input');
+      const style = getComputedStyle(input.closest('.search-input-wrapper'));
+      ({ background: style.backgroundColor, border: style.borderTopWidth });
+    JS
+    expect(search_style["background"]).to eq("rgba(0, 0, 0, 0)")
+    expect(search_style["border"]).to eq("1px")
+
     page.execute_script(<<~JS)
       const wrapper = document.querySelector('.d-header .contents > .floating-search-input-wrapper');
       const legacy = wrapper.cloneNode(true);

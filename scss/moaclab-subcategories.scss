@@ -1,4 +1,16 @@
 body:not(.admin-interface) .custom-right-sidebar {
+  @media (width > 1200px) {
+    &:has(.custom-right-sidebar_category-about) {
+      position: sticky;
+      top: calc(var(--header-offset, 56px) + 16px);
+      align-self: start;
+      max-height: calc(100dvh - var(--header-offset, 56px) - 32px);
+      overflow: auto;
+      overscroll-behavior: contain;
+      scrollbar-width: thin;
+    }
+  }
+
   .custom-right-sidebar_category-about {
     padding: 16px;
     border: 0;
@@ -136,6 +148,26 @@ body:not(.admin-interface) .custom-right-sidebar {
         font-size: 14px;
         line-height: 20px;
         font-weight: 600;
+      }
+
+      .moaclab-subcategory-logo {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        flex: 0 0 32px;
+        width: 32px;
+        height: 32px;
+        overflow: hidden;
+        border-radius: 50%;
+        background: var(--moaclab-canvas);
+
+        picture,
+        img {
+          display: block;
+          width: 100%;
+          height: 100%;
+          object-fit: contain;
+        }
       }
     }
   }

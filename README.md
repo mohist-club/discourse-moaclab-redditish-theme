@@ -19,7 +19,16 @@ https://github.com/mohist-club/discourse-moaclab-redditish-theme.git
 - Upstream: https://github.com/discourse/discourse-redditish-theme
 - Meta topic: https://meta.discourse.org/t/-/269466
 
-版本：`1.7.0`
+版本：`1.8.0`
+
+## 1.8.0
+
+- 类别右栏从原位置吸顶，不再限制屏幕高度；长内容可在右栏滚动。
+- 子类别优先显示维护的 Logo，支持明暗模式图片，没有 Logo 时沿用原生图标。
+- 导航上方发布栏只在配置的首页列表显示，类别和标签页不再重复出现。
+- 顶部搜索改为透明底细边框，保留单层聚焦高亮。
+- 修正原生 clearfix 导致收起态竖线高度为零的问题，并提高层级，避免被页面背景遮挡。
+- 话题详情移除标题和正文外围边框，使用留白与浅色信息区，保留正文引用和代码块样式。
 
 ## 1.7.0
 
