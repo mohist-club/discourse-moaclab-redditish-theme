@@ -1,6 +1,6 @@
 body:not(.admin-interface) .custom-right-sidebar {
   @media (width > 1200px) {
-    &:has(.custom-right-sidebar_category-about) {
+    &:has(.custom-right-sidebar_category-about, .custom-right-sidebar_welcome) {
       position: sticky;
       top: calc(var(--header-offset, 56px) + 16px);
       align-self: start;

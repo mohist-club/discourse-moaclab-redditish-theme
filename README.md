@@ -19,7 +19,13 @@ https://github.com/mohist-club/discourse-moaclab-redditish-theme.git
 - Upstream: https://github.com/discourse/discourse-redditish-theme
 - Meta topic: https://meta.discourse.org/t/-/269466
 
-版本：`1.9.0`
+版本：`1.9.1`
+
+## 1.9.1
+
+- 首页信息流右栏沿用类别页的原位置吸顶，滚动时固定在页眉下方 16px。
+- 欢迎区、最近浏览和积分榜保持原来的顺序和宽度，作为一个整体吸顶。
+- 右栏过长时内部滚动，短桌面窗口也能访问底部模块；小屏仍隐藏右栏。
 
 ## 1.9.0
 
