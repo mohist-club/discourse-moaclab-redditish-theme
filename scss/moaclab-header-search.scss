@@ -129,7 +129,7 @@ body:not(.admin-interface) .d-header {
 @media (width >= 768px) {
   body:not(.admin-interface) .d-header:has(.btn-sidebar-toggle) {
     > .wrap {
-      width: auto;
+      width: 100%;
       max-width: none;
       margin-inline: 0;
       padding-inline: 16px;

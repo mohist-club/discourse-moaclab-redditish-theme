@@ -11,7 +11,9 @@ RSpec.describe "Sidebar navigation appearance", system: true do
   end
 
   def bounds(selector)
-    page.evaluate_script("document.querySelector(#{selector.to_json}).getBoundingClientRect().toJSON()")
+    page.evaluate_script(
+      "document.querySelector(#{selector.to_json}).getBoundingClientRect().toJSON()",
+    )
   end
 
   it "uses an outline for neutral category icons and the native glyph when selected" do

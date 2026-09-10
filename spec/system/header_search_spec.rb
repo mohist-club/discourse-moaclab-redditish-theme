@@ -4,7 +4,14 @@ RSpec.describe "Header search compatibility", system: true do
   let!(:theme) { upload_theme }
 
   before do
-    SiteSetting.search_experience = "search_field"
+    Themes::ThemeSiteSettingManager.call(
+      guardian: Fabricate(:admin).guardian,
+      params: {
+        theme_id: theme.id,
+        name: "search_experience",
+        value: "search_field",
+      },
+    )
     page.current_window.resize_to(1440, 1000)
   end
 
