@@ -30,7 +30,7 @@ body[class*="navigation-"]:not([class*="archetype-"]) {
 
   #main-outlet-wrapper {
     grid-template-columns:
-      var(--d-sidebar-width) minmax(0, 1fr) minmax(0, 756px)
+      var(--d-sidebar-width) minmax(0, 1fr) minmax(0, var(--moaclab-feed-width))
       312px minmax(0, 1fr);
     grid-template-areas:
       "sidebar category-banner category-banner category-banner category-banner"
@@ -45,15 +45,15 @@ body[class*="navigation-"]:not([class*="archetype-"]) {
       "sidebar category-banner category-banner category-banner category-banner"
       "sidebar lspace content sidebar2 rspace";
     grid-template-columns:
-      var(--d-sidebar-width) minmax(0, 1fr) minmax(0, 756px)
+      var(--d-sidebar-width) minmax(0, 1fr) minmax(0, var(--moaclab-feed-width))
       312px minmax(0, 1fr);
   }
 
   &:not(.has-sidebar-page) #main-outlet-wrapper {
-    grid-template-columns: 32px minmax(0, 1fr) minmax(0, 756px) 312px minmax(
+    grid-template-columns: 32px minmax(0, 1fr) minmax(
         0,
-        1fr
-      );
+        var(--moaclab-feed-width)
+      ) 312px minmax(0, 1fr);
   }
 
   #main-outlet {
@@ -61,7 +61,7 @@ body[class*="navigation-"]:not([class*="archetype-"]) {
   }
 
   #navigation-bar {
-    padding: 0 4px;
+    padding: 0;
     align-items: center;
     border: 0;
     box-shadow: none;
@@ -162,7 +162,10 @@ body[class*="navigation-"]:not([class*="archetype-"]) {
     #main-outlet-wrapper,
     &.has-sidebar-page #main-outlet-wrapper {
       grid-template-columns:
-        var(--d-sidebar-width) minmax(0, 1fr) minmax(0, 756px)
+        var(--d-sidebar-width) minmax(0, 1fr) minmax(
+          0,
+          var(--moaclab-feed-width)
+        )
         minmax(0, 1fr);
       grid-template-areas:
         "sidebar category-banner category-banner category-banner"
@@ -171,7 +174,10 @@ body[class*="navigation-"]:not([class*="archetype-"]) {
     }
 
     &:not(.has-sidebar-page) #main-outlet-wrapper {
-      grid-template-columns: 32px minmax(0, 1fr) minmax(0, 756px) minmax(0, 1fr);
+      grid-template-columns: 32px minmax(0, 1fr) minmax(
+          0,
+          var(--moaclab-feed-width)
+        ) minmax(0, 1fr);
     }
 
     .custom-right-sidebar {
@@ -190,7 +196,7 @@ body[class*="navigation-"]:not([class*="archetype-"]) {
     }
 
     #navigation-bar {
-      padding-left: 4px;
+      padding-left: 0;
     }
 
     .custom-category-banner,
@@ -217,11 +223,12 @@ body:not(.admin-interface) .d-header {
   box-sizing: border-box;
   background: var(--moaclab-canvas);
   border: 0;
-  box-shadow: 0 2px 12px rgb(0 0 0 / 4%);
+  border-bottom: 1px solid var(--moaclab-line);
+  box-shadow: none;
 
   &:hover,
   &:has(.menu-panel:hover) {
-    border: 0;
+    border-bottom: 1px solid var(--moaclab-line);
   }
 
   .header-sidebar-toggle .btn-sidebar-toggle,

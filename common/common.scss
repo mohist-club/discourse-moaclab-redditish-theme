@@ -3,6 +3,7 @@
   --d-nav-pill-border-radius: 100px;
   --d-input-border-radius: 4px;
   --topic-body-width: 900px;
+  --moaclab-feed-width: 700px;
 }
 
 @mixin custom-card {
@@ -36,7 +37,6 @@
 @import "category-banner";
 @import "category-boxes";
 @import "chat";
-@import "composer";
 @import "groups";
 @import "header";
 @import "right-sidebar";
@@ -66,20 +66,26 @@ body {
         "category-banner category-banner category-banner category-banner category-banner category-banner"
         "sidebar lspace content sidebar2 rspace sidebar-spacer";
       grid-template-columns:
-        var(--d-sidebar-width) 1fr minmax(0, 756px)
+        var(--d-sidebar-width) 1fr minmax(0, var(--moaclab-feed-width))
         312px 1fr var(--d-sidebar-width);
       grid-template-rows: auto 1fr;
       gap: 0 1.5em;
 
       @media screen and (width <= 1500px) {
-        grid-template-columns: auto 1fr minmax(0, 756px) 312px 1fr auto;
+        grid-template-columns: auto 1fr minmax(
+            0,
+            var(--moaclab-feed-width)
+          ) 312px 1fr auto;
       }
 
       @media screen and (width <= 1160px) {
         grid-template-areas:
           "category-banner category-banner category-banner category-banner category-banner"
           "sidebar lspace content rspace sidebar-spacer";
-        grid-template-columns: auto 1fr minmax(0, 756px) 1fr auto;
+        grid-template-columns: auto 1fr minmax(
+            0,
+            var(--moaclab-feed-width)
+          ) 1fr auto;
 
         .custom-right-sidebar {
           display: none;
@@ -104,7 +110,10 @@ body {
         grid-template-areas:
           "sidebar category-banner category-banner category-banner category-banner"
           "sidebar lspace content rspace sidebar-spacer";
-        grid-template-columns: auto 1fr minmax(0, 756px) 1fr auto;
+        grid-template-columns: auto 1fr minmax(
+            0,
+            var(--moaclab-feed-width)
+          ) 1fr auto;
 
         .custom-right-sidebar {
           display: none;
@@ -130,7 +139,8 @@ body {
     .btn-icon,
     [class*="popup-menu-btn"],
     [class*="post-action-menu__"],
-    [class*="topic-map__"]
+    [class*="topic-map__"],
+    :where(#reply-control *)
   ) {
     padding: 0.5em 1em;
   }

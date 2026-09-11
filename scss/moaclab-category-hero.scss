@@ -2,7 +2,7 @@
   --moaclab-category-accent: var(--moaclab-muted);
   box-sizing: border-box;
   width: 100%;
-  max-width: 1092px;
+  max-width: calc(var(--moaclab-feed-width) + 336px);
   min-width: 0;
   justify-self: center;
   margin: 0 0 20px;
@@ -170,7 +170,7 @@
   }
 
   @media (width <= 1200px) {
-    max-width: 756px;
+    max-width: var(--moaclab-feed-width);
 
     .moaclab-category-hero__description {
       display: block;

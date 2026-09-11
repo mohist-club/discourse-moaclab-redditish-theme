@@ -77,4 +77,21 @@ RSpec.describe "Header search compatibility", system: true do
       ),
     ).to be > 100
   end
+
+  it "separates the fixed header with a line instead of a shadow" do
+    visit("/c/#{category.slug}/#{category.id}")
+    find(".d-header").hover
+
+    appearance = page.evaluate_script(<<~JS)
+      (() => {
+        const style = getComputedStyle(document.querySelector('.d-header'));
+        return { border: style.borderBottomWidth, borderStyle: style.borderBottomStyle,
+                 shadow: style.boxShadow, position: style.position };
+      })()
+    JS
+    expect(appearance["border"]).to eq("1px")
+    expect(appearance["borderStyle"]).to eq("solid")
+    expect(appearance["shadow"]).to eq("none")
+    expect(appearance["position"]).to eq("fixed")
+  end
 end

@@ -19,7 +19,14 @@ https://github.com/mohist-club/discourse-moaclab-redditish-theme.git
 - Upstream: https://github.com/discourse/discourse-redditish-theme
 - Meta topic: https://meta.discourse.org/t/-/269466
 
-版本：`1.9.2`
+版本：`1.9.3`
+
+## 1.9.3
+
+- 发布入口、筛选栏与帖子卡片统一左边缘，发布者头像采用一致的内边距。
+- 桌面信息流宽度统一为 700px，窄屏自适应；类别横幅同步对齐内容与右栏。
+- 顶部固定导航改用细分隔线，移除阴影，悬停时保留分隔线。
+- 移除主题对发帖编辑器的边框、间距、工具栏、拖动条和手机布局覆盖，恢复原生样式。
 
 ## 1.9.2
 

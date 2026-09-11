@@ -186,36 +186,6 @@ html:not(.footer-nav-visible) #topic-progress-wrapper {
   margin-top: 0;
 }
 
-#reply-control {
-  .reply-to {
-    margin: 0.5em 0;
-    font-size: var(--font-down-1);
-  }
-
-  .reply-area {
-    padding: 0 0.5em 0.5em;
-  }
-
-  .grippie {
-    display: none;
-  }
-
-  .submit-panel {
-    margin-bottom: 0.25em;
-    margin-top: 0.33em;
-  }
-
-  .composer-actions {
-    .select-kit-body {
-      font-size: var(--font-up-1);
-    }
-  }
-
-  &.closed {
-    border: none;
-  }
-}
-
 .alert.alert-info.clickable {
   position: absolute;
   right: 0;
