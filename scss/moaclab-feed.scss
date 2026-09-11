@@ -2,9 +2,11 @@
 body.tags-page,
 body[class*="navigation-"]:not([class*="archetype-"]) {
   #main-outlet {
+    box-sizing: border-box;
     width: 100%;
     min-width: 0;
     max-width: var(--moaclab-feed-width);
+    padding-inline: 0;
   }
 
   #navigation-bar {

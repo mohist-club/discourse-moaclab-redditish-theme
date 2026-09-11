@@ -29,6 +29,9 @@ body[class*="navigation-"]:not([class*="archetype-"]) {
   }
 
   #main-outlet-wrapper {
+    box-sizing: border-box;
+    width: 100%;
+    max-width: none;
     grid-template-columns:
       var(--d-sidebar-width) minmax(0, 1fr) minmax(0, var(--moaclab-feed-width))
       312px minmax(0, 1fr);
@@ -50,10 +53,9 @@ body[class*="navigation-"]:not([class*="archetype-"]) {
   }
 
   &:not(.has-sidebar-page) #main-outlet-wrapper {
-    grid-template-columns: 32px minmax(0, 1fr) minmax(
-        0,
-        var(--moaclab-feed-width)
-      ) 312px minmax(0, 1fr);
+    grid-template-columns:
+      32px minmax(0, 1fr) minmax(0, var(--moaclab-feed-width))
+      312px minmax(0, 1fr);
   }
 
   #main-outlet {
@@ -174,10 +176,9 @@ body[class*="navigation-"]:not([class*="archetype-"]) {
     }
 
     &:not(.has-sidebar-page) #main-outlet-wrapper {
-      grid-template-columns: 32px minmax(0, 1fr) minmax(
-          0,
-          var(--moaclab-feed-width)
-        ) minmax(0, 1fr);
+      grid-template-columns:
+        32px minmax(0, 1fr) minmax(0, var(--moaclab-feed-width))
+        minmax(0, 1fr);
     }
 
     .custom-right-sidebar {
