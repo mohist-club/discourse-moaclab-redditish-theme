@@ -9,6 +9,7 @@ RSpec.describe "Content surfaces", system: true do
 
   it "removes page frames in search, profiles, the directory and about" do
     SiteSetting.enable_user_directory = true
+    sign_in(user)
     pages = {
       "/search?q=keyboard" => ".search-container",
       "/u/#{user.username}/summary" => ".user-main",
