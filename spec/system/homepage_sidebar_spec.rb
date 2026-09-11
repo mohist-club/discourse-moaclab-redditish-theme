@@ -9,13 +9,13 @@ RSpec.describe "Homepage sidebar", system: true do
     page.current_window.resize_to(1440, 700)
   end
 
-  it "keeps the complete right column in place while the homepage scrolls" do
+  it "keeps only the recent topics and leaderboard group sticky" do
     visit("/latest")
     expect(page).to have_css(".custom-right-sidebar_welcome")
 
     initial = page.evaluate_script(<<~JS)
       (() => {
-        const sidebar = document.querySelector('.custom-right-sidebar');
+        const sidebar = document.querySelector('.moaclab-home-sidebar-sticky');
         const style = getComputedStyle(sidebar);
         const rect = sidebar.getBoundingClientRect();
         return { position: style.position, threshold: parseFloat(style.top),
@@ -29,39 +29,47 @@ RSpec.describe "Homepage sidebar", system: true do
     try_until_success do
       current = page.evaluate_script(<<~JS)
         (() => {
-          const rect = document.querySelector('.custom-right-sidebar').getBoundingClientRect();
-          return { top: rect.top, left: rect.left, width: rect.width, scroll: window.scrollY };
+          const rect = document.querySelector('.moaclab-home-sidebar-sticky').getBoundingClientRect();
+          const welcome = document.querySelector('.custom-right-sidebar_welcome');
+          return { top: rect.top, left: rect.left, width: rect.width, scroll: window.scrollY,
+                   welcomeBottom: welcome.getBoundingClientRect().bottom };
         })()
       JS
       expect(current["scroll"]).to be > 0
       expect(current["top"]).to be_within(1).of(initial["threshold"])
       expect(current["left"]).to be_within(1).of(initial["left"])
       expect(current["width"]).to be_within(1).of(initial["width"])
+      expect(current["welcomeBottom"]).to be < 0
     end
   end
 
-  it "allows long modules to scroll inside the right column" do
+  it "does not create an internal scrollbar even in a tall desktop window" do
+    page.current_window.resize_to(1440, 1000)
     visit("/latest")
     expect(page).to have_css(".custom-right-sidebar_welcome")
     page.execute_script(<<~JS)
       const sidebar = document.querySelector('.custom-right-sidebar');
       const module = document.createElement('div');
       module.style.minHeight = '1200px';
-      sidebar.append(module);
+      sidebar.querySelector('.moaclab-home-sidebar-sticky').append(module);
       sidebar.scrollTop = 300;
     JS
 
     metrics = page.evaluate_script(<<~JS)
       (() => {
         const sidebar = document.querySelector('.custom-right-sidebar');
-        const rect = sidebar.getBoundingClientRect();
+        const group = sidebar.querySelector('.moaclab-home-sidebar-sticky');
         return { scroll: sidebar.scrollTop, overflow: getComputedStyle(sidebar).overflowY,
-                 bottom: rect.bottom, viewport: window.innerHeight };
+                 position: getComputedStyle(sidebar).position,
+                 groupOverflow: getComputedStyle(group).overflowY,
+                 maxHeight: getComputedStyle(sidebar).maxHeight };
       })()
     JS
-    expect(metrics["overflow"]).to eq("auto")
-    expect(metrics["scroll"]).to be > 0
-    expect(metrics["bottom"]).to be <= metrics["viewport"]
+    expect(metrics["position"]).to eq("static")
+    expect(metrics["overflow"]).to eq("visible")
+    expect(metrics["groupOverflow"]).to eq("visible")
+    expect(metrics["maxHeight"]).to eq("none")
+    expect(metrics["scroll"]).to eq(0)
   end
 
   it "keeps the right column hidden on small screens" do

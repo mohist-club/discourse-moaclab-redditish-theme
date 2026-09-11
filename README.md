@@ -19,7 +19,13 @@ https://github.com/mohist-club/discourse-moaclab-redditish-theme.git
 - Upstream: https://github.com/discourse/discourse-redditish-theme
 - Meta topic: https://meta.discourse.org/t/-/269466
 
-版本：`1.9.1`
+版本：`1.9.2`
+
+## 1.9.2
+
+- 首页仅将最近浏览与积分榜组合吸顶，欢迎区随页面正常滚动。
+- 取消首页右栏的高度限制和内部滚动条，保持模块原位置和宽度。
+- 类别页吸顶和小屏右栏隐藏行为不变。
 
 ## 1.9.1
 

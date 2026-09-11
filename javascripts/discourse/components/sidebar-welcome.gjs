@@ -8,6 +8,7 @@ import Composer from "discourse/models/composer";
 import { and } from "discourse/truth-helpers";
 import { i18n } from "discourse-i18n";
 import SidebarLatestTopics from "./sidebar-latest-topics";
+import SidebarLeaderboard from "./sidebar-leaderboard";
 
 export default class SidebarWelcome extends Component {
   @service router;
@@ -49,7 +50,10 @@ export default class SidebarWelcome extends Component {
           />
         {{/if}}
       </div>
-      <SidebarLatestTopics />
+      <div class="moaclab-home-sidebar-sticky">
+        <SidebarLatestTopics />
+        <SidebarLeaderboard />
+      </div>
     {{/if}}
   </template>
 }

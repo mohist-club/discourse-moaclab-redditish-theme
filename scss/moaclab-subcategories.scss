@@ -1,6 +1,6 @@
 body:not(.admin-interface) .custom-right-sidebar {
   @media (width > 1200px) {
-    &:has(.custom-right-sidebar_category-about, .custom-right-sidebar_welcome) {
+    &:has(.custom-right-sidebar_category-about) {
       position: sticky;
       top: calc(var(--header-offset, 56px) + 16px);
       align-self: start;
@@ -8,6 +8,22 @@ body:not(.admin-interface) .custom-right-sidebar {
       overflow: auto;
       overscroll-behavior: contain;
       scrollbar-width: thin;
+    }
+
+    &:has(.moaclab-home-sidebar-sticky) {
+      position: static;
+      align-self: stretch;
+      max-height: none;
+      overflow: visible;
+    }
+
+    .moaclab-home-sidebar-sticky {
+      position: sticky;
+      top: calc(var(--header-offset, 56px) + 16px);
+      display: flex;
+      flex-direction: column;
+      gap: 1em;
+      overflow: visible;
     }
   }
 

@@ -30,7 +30,7 @@
     "sidebar-heart": "assets/sidebar/heart.svg"
   },
   "name": "Moaclab Redditish",
-  "theme_version": "1.9.1",
+  "theme_version": "1.9.2",
   "modifiers": {
     "serialize_topic_excerpts": true,
     "topic_thumbnail_sizes": [[620, 500]]
