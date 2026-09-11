@@ -82,8 +82,15 @@ body[class*="navigation-"]:not([class*="archetype-"]) {
   }
 }
 
+// Topic footer suggestions reuse the feed cards outside discovery routes.
+body:not(.admin-interface) .topic-list:has(.moaclab-feed-item) {
+  width: 100%;
+  max-width: var(--moaclab-feed-width);
+}
+
 .topic-list .moaclab-feed-item.custom-topic-layout {
   box-sizing: border-box;
+  max-width: var(--moaclab-feed-width);
   display: flex;
   flex-direction: column;
   gap: 8px;

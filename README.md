@@ -19,7 +19,14 @@ https://github.com/mohist-club/discourse-moaclab-redditish-theme.git
 - Upstream: https://github.com/discourse/discourse-redditish-theme
 - Meta topic: https://meta.discourse.org/t/-/269466
 
-版本：`1.9.3`
+版本：`1.9.4`
+
+## 1.9.4
+
+- 700px 卡片宽度覆盖话题底部的新话题、未读话题与推荐列表，窄屏保持自适应。
+- 搜索、个人资料、用户目录、关于、类别目录、标签与群组导航移除内容区外框，悬停时也不恢复边框。
+- 徽章、群组与类别项目使用浅色底区分，移除嵌套边框。
+- 保留表单控件、按钮、正文引用和功能分隔线，不影响后台管理样式。
 
 ## 1.9.3
 
