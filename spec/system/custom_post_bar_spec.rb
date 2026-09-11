@@ -42,10 +42,14 @@ RSpec.describe "Creating a topic from the custom post bar", system: true do
                      fits: document.documentElement.scrollWidth <= window.innerWidth };
           })()
         JS
-        expect(layout["barLeft"]).to be_within(1).of(layout["cardLeft"])
         expect(layout["navLeft"]).to be_within(1).of(layout["cardLeft"])
         expect(layout["pillLeft"]).to be_within(1).of(layout["cardLeft"])
-        expect(layout["barWidth"]).to be_within(1).of(layout["cardWidth"])
+        if width > 767
+          expect(layout["barLeft"]).to be_within(1).of(layout["cardLeft"])
+          expect(layout["barWidth"]).to be_within(1).of(layout["cardWidth"])
+        else
+          expect(page).to have_no_css(".custom-post-bar-contents", visible: true)
+        end
         expect(layout["cardWidth"]).to be <= 700
         expect(layout["cardWidth"]).to be_within(1).of(700) if width == 1600
         expect(layout["fits"]).to eq(true)
