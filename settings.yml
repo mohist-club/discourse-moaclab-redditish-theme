@@ -27,6 +27,20 @@ homepage_leaderboard_count:
     en: "Number of members to display (1-10). Tied ranks follow the source leaderboard."
     zh_CN: "展示人数（1–10），并列名次与原积分榜一致。"
 
+community_qq_url:
+  default: ""
+  type: string
+  description:
+    en: "QQ community invite URL. Leave blank to hide QQ from the floating community menu."
+    zh_CN: "QQ 社区邀请链接；留空时不会在悬浮社区入口中显示 QQ。"
+
+community_discord_url:
+  default: ""
+  type: string
+  description:
+    en: "Discord invite URL. Leave blank to hide Discord from the floating community menu."
+    zh_CN: "Discord 邀请链接；留空时不会在悬浮社区入口中显示 Discord。"
+
 svg_icons:
   default: "far-heart|far-comment|far-share-from-square|ellipsis|circle-info|rss|star|far-star"
   type: list

@@ -2,6 +2,11 @@
   gap: 0 !important;
 }
 
+.moaclab-community-entry {
+  right: 16px;
+  bottom: max(16px, env(safe-area-inset-bottom));
+}
+
 #main-outlet,
 .topic-list .topic-excerpt,
 .navigation-toggle,
