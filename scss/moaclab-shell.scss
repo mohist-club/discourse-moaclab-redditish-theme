@@ -233,8 +233,7 @@ body:not(.admin-interface) .d-header {
   }
 
   .header-sidebar-toggle .btn-sidebar-toggle,
-  .d-header-icons .icon,
-  .language-switcher-trigger {
+  .d-header-icons .icon {
     display: inline-flex;
     align-items: center;
     justify-content: center;
@@ -273,6 +272,41 @@ body:not(.admin-interface) .d-header {
     .active .icon {
       background: var(--moaclab-pill-hover);
       color: var(--moaclab-ink);
+    }
+  }
+
+  .language-switcher-trigger {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 4px;
+    min-width: 0;
+    height: 36px;
+    padding: 0 10px !important;
+    margin: 0;
+    border: 0;
+    border-radius: 18px;
+    color: var(--moaclab-muted);
+    background: transparent;
+    font-size: 12px;
+    font-weight: 600;
+    line-height: 1;
+
+    .d-icon {
+      width: 16px;
+      height: 16px;
+      font-size: 16px;
+      color: inherit;
+    }
+
+    &:hover {
+      color: var(--moaclab-ink);
+      background: var(--moaclab-pill);
+    }
+
+    &[aria-expanded="true"] {
+      color: var(--moaclab-ink);
+      background: var(--moaclab-pill-hover);
     }
   }
 
