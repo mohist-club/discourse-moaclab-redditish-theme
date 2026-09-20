@@ -320,7 +320,9 @@ body.no-ember #main-outlet.not-found-container {
   }
 }
 
-.admin-content {
+// Admin screens already provide their own content hierarchy. Keep the outer
+// canvas unframed and reserve cards for the controls inside it.
+body:not(.admin-interface) .admin-content {
   @include custom-card;
 }
 
