@@ -231,7 +231,7 @@ body:not(.admin-interface) .topic-list:has(.moaclab-feed-item) {
     padding: 0;
     min-height: 32px;
 
-    > .like-count,
+    > .like-toggle,
     > .reply-count,
     > .share-toggle {
       display: inline-flex;
@@ -272,6 +272,27 @@ body:not(.admin-interface) .topic-list:has(.moaclab-feed-item) {
         margin: 0;
         background: currentcolor;
         mask: url($share-outline) center / contain no-repeat;
+      }
+    }
+
+    > .like-toggle {
+      cursor: pointer;
+      transition:
+        background 0.15s ease,
+        color 0.15s ease;
+
+      &.has-liked {
+        background: var(--tertiary-low);
+        color: var(--tertiary);
+
+        &:hover {
+          background: var(--tertiary-low);
+        }
+      }
+
+      &:disabled {
+        cursor: not-allowed;
+        opacity: 0.6;
       }
     }
 

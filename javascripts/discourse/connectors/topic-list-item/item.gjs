@@ -1,4 +1,5 @@
 import Component from "@glimmer/component";
+import { tracked } from "@glimmer/tracking";
 import { get } from "@ember/helper";
 import { on } from "@ember/modifier";
 import { action } from "@ember/object";
@@ -17,12 +18,18 @@ import discourseTags from "discourse/helpers/discourse-tags";
 import formatDate from "discourse/helpers/format-date";
 import lazyHash from "discourse/helpers/lazy-hash";
 import topicFeaturedLink from "discourse/helpers/topic-featured-link";
+import { deferAnonymousAction } from "discourse/lib/anonymous-action";
 import { wantsNewWindow } from "discourse/lib/intercept-click";
 import { i18n } from "discourse-i18n";
 
 export default class Item extends Component {
   @service currentUser;
   @service modal;
+
+  @tracked liked = false;
+  @tracked likeCount;
+  @tracked likePost;
+  @tracked isTogglingLike = false;
 
   get imageRatioStyle() {
     const thumbnail = this.args.outletArgs.topic.thumbnails?.[0];
@@ -68,6 +75,62 @@ export default class Item extends Component {
     this.modal.show(ShareTopicModal, {
       model: { topic: this.args.outletArgs.topic },
     });
+  }
+
+  get topicLikeCount() {
+    return this.likeCount ?? this.args.outletArgs.topic.like_count ?? 0;
+  }
+
+  get canToggleLike() {
+    if (!this.currentUser) {
+      return !this.args.outletArgs.topic.archived;
+    }
+
+    return this.likePost ? this.likePost.canToggleLike : true;
+  }
+
+  get likeDisabled() {
+    return this.isTogglingLike || !this.canToggleLike;
+  }
+
+  @action
+  async toggleLike(event) {
+    event.stopPropagation();
+
+    if (this.isTogglingLike || !this.canToggleLike) {
+      return;
+    }
+
+    this.isTogglingLike = true;
+
+    try {
+      const topic = this.args.outletArgs.topic;
+      const post = this.likePost ?? (await topic.firstPost());
+      this.likePost = post;
+      this.liked = post.liked;
+
+      if (!this.currentUser) {
+        await deferAnonymousAction(this, "like_post", { post_id: post.id });
+        return;
+      }
+
+      if (!post.canToggleLike) {
+        return;
+      }
+
+      const wasLiked = post.liked;
+      await post.likeAction.togglePromise(post);
+      this.liked = post.liked;
+
+      if (wasLiked !== post.liked) {
+        this.likeCount = Math.max(
+          0,
+          Number(this.topicLikeCount) + (post.liked ? 1 : -1)
+        );
+      }
+    } finally {
+      this.isTogglingLike = false;
+    }
   }
 
   <template>
@@ -169,11 +232,24 @@ export default class Item extends Component {
 
       <div class="custom-topic-layout_bottom-bar">
         {{#if settings.show_like_count}}
-          <span class="like-count" title={{i18n "likes"}}>
-            {{icon "far-heart"}}
-            {{@outletArgs.topic.like_count}}
-            <span class="sr-only">{{i18n "likes"}}</span>
-          </span>
+          <button
+            type="button"
+            class="like-toggle {{if this.liked 'has-liked'}}"
+            title={{i18n
+              (if this.liked "post.controls.undo_like" "post.controls.like")
+            }}
+            aria-pressed={{this.liked}}
+            disabled={{this.likeDisabled}}
+            {{on "click" this.toggleLike}}
+          >
+            {{icon (if this.liked "d-liked" "d-unliked")}}
+            {{this.topicLikeCount}}
+            <span class="sr-only">
+              {{i18n
+                (if this.liked "post.controls.undo_like" "post.controls.like")
+              }}
+            </span>
+          </button>
         {{/if}}
 
         <a
