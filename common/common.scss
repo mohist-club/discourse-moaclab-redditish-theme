@@ -286,6 +286,12 @@ body {
   padding-bottom: 2em; // makes some room for "powered by discourse"
 }
 
+// The server-rendered 404 page has no .d-header-wrap spacer. Reserve room for
+// the fixed theme header so its illustration and title cannot start beneath it.
+body.no-ember #main-outlet.not-found-container {
+  padding-top: calc(var(--space-8) + var(--moaclab-header-height));
+}
+
 #banner {
   @include custom-card;
 }
