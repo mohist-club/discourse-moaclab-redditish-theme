@@ -6,6 +6,12 @@ show_like_count:
   default: true
   description: "Shows the like count before the reply count in the topic list"
 
+sidebar_tags_enabled:
+  default: true
+  description:
+    en: "Show the native Tags section in the left sidebar. This does not hide tag pages or tags on topics."
+    zh_CN: "在左侧边栏显示原生 Tags 分区。此设置不会隐藏标签页或话题中的标签。"
+
 homepage_leaderboard_enabled:
   default: true
   description:

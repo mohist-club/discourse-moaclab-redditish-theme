@@ -64,6 +64,14 @@ body:not(.admin-interface) :is(.sidebar-wrapper, .sidebar-hamburger-dropdown) {
   }
 }
 
+// This is scoped to the native sidebar section so tag routes and topic tags
+// remain available when an administrator disables sidebar tags.
+body.moaclab-sidebar-tags-hidden:not(.admin-interface)
+  :is(.sidebar-wrapper, .sidebar-hamburger-dropdown)
+  .sidebar-section-wrapper[data-section-name="tags"] {
+  display: none;
+}
+
 @media (width >= 768px) {
   body:not(.admin-interface) .d-header:has(.btn-sidebar-toggle) {
     .header-sidebar-toggle {
