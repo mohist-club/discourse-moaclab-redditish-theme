@@ -1,5 +1,19 @@
 en:
   theme_metadata:
+    settings:
+      homepage_gb_works:
+        description: "Add homepage group buys individually. Upload an image or enter an image URL; topic links must be on this site."
+        schema:
+          properties:
+            title:
+              label: "Title"
+            image:
+              label: "Upload image"
+            image_url:
+              label: "Image URL (optional)"
+              description: "Use an HTTPS image URL when no image is uploaded."
+            topic_url:
+              label: "Community topic URL"
     description: "A Discourse theme that looks a little like reddit"
   top_route_welcome: "Welcome!"
   top_route_description: "You're viewing a feed containing topics from all categories. If you're looking for something more specific, browse <a href='%{basePath}/categories'>the category list</a>."

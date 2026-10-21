@@ -8,33 +8,23 @@ homepage_gb_enabled:
     en: "Show the configured community group buy above the homepage topic composer."
     zh_CN: "在社区首页发布话题框上方显示已配置的社区 GB 作品。"
 
-homepage_gb_items:
-  default: "[]"
-  type: string
-  description:
-    en: 'JSON array of group buys: [{"title":"Name","image_url":"https://...","topic_url":"/t/..."}]. The topic URL must be on this site. Multiple items rotate automatically.'
-    zh_CN: 'GB 作品 JSON 列表，例如 [{"title":"作品名称","image_url":"https://图片地址","topic_url":"/t/话题地址"}]。可填写多项，话题链接须为本站地址；多项时自动轮播。'
-
-homepage_gb_title:
-  default: ""
-  type: string
-  description:
-    en: "Name of the featured group buy."
-    zh_CN: "首页展示的 GB 作品名称。"
-
-homepage_gb_image_url:
-  default: ""
-  type: string
-  description:
-    en: "HTTPS image URL for the featured group buy."
-    zh_CN: "GB 作品图片的 HTTPS 地址。"
-
-homepage_gb_topic_url:
-  default: ""
-  type: string
-  description:
-    en: "Community topic URL for the featured group buy."
-    zh_CN: "GB 作品的社区详情话题链接。"
+homepage_gb_works:
+  type: objects
+  default: []
+  schema:
+    name: group buy
+    identifier: title
+    properties:
+      title:
+        type: string
+        required: true
+      image:
+        type: upload
+      image_url:
+        type: string
+      topic_url:
+        type: string
+        required: true
 
 show_like_count:
   default: true

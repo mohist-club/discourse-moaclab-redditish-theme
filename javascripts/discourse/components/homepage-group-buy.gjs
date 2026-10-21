@@ -24,27 +24,12 @@ function safeUrl(value, image) {
 }
 
 function configuredItems() {
-  let rawItems;
-  try {
-    rawItems = JSON.parse(settings.homepage_gb_items || "[]");
-  } catch {
-    rawItems = [];
-  }
-  if (!Array.isArray(rawItems)) {
-    rawItems = [];
-  }
-  if (!rawItems.length) {
-    rawItems = [
-      {
-        title: settings.homepage_gb_title,
-        image_url: settings.homepage_gb_image_url,
-        topic_url: settings.homepage_gb_topic_url,
-      },
-    ];
-  }
+  const rawItems = Array.isArray(settings.homepage_gb_works)
+    ? settings.homepage_gb_works
+    : [];
   return rawItems.flatMap((item) => {
     const title = typeof item?.title === "string" ? item.title.trim() : "";
-    const image = safeUrl(item?.image_url, true);
+    const image = safeUrl(item?.image || item?.image_url, true);
     const topic = safeUrl(item?.topic_url, false);
     return title && image && topic ? [{ title, image, topic }] : [];
   });
