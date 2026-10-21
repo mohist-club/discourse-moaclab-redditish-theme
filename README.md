@@ -149,3 +149,16 @@ https://github.com/mohist-club/discourse-moaclab-redditish-theme.git
 - 头像和用户名，紧凑标题间距；图片完整显示，文字帖保留三行摘要。
 - 线框图标、点赞数量、评论链接和原生分享弹窗。
 - 调整右侧栏密度；保留主题原有搜索和配色方案适配。
+
+# 首页社区 GB 展示
+
+在主题设置中开启 `homepage_gb_enabled`，并在 `homepage_gb_items` 填写 JSON 数组：
+
+```json
+[
+  {"title": "作品 A", "image_url": "https://example.com/a.jpg", "topic_url": "/t/example-a/123"},
+  {"title": "作品 B", "image_url": "https://example.com/b.jpg", "topic_url": "/t/example-b/456"}
+]
+```
+
+图片需要使用 HTTPS 地址，话题链接需要指向本站。无效条目会被跳过；没有有效条目时不显示模块。多件作品每 6 秒切换，也可以手动切换；鼠标悬停、键盘焦点位于模块内或系统设置为减少动态效果时不会自动切换。该模块仅展示作品并链接到话题，不处理订单、付款或凭证。
