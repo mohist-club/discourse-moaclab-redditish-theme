@@ -19,7 +19,12 @@ https://github.com/mohist-club/discourse-moaclab-redditish-theme.git
 - Upstream: https://github.com/discourse/discourse-redditish-theme
 - Meta topic: https://meta.discourse.org/t/-/269466
 
-版本 / Version：`1.9.6`
+版本 / Version：`1.9.7`
+
+## 1.9.7
+
+- 首页 GB 展示横跨内容区及右栏，窄屏自适应单列布局。
+- The homepage GB hero spans the feed and right sidebar, adapting to a single column on smaller screens.
 
 ## 1.9.6
 
