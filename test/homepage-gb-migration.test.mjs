@@ -35,3 +35,20 @@ test("rejects broken JSON or incomplete single work without deleting settings", 
     assert.deepEqual([...settings], input);
   }
 });
+
+test("removes old image fields while keeping work names and topic links", async () => {
+  const nextSource = await readFile(
+    new URL("../migrations/settings/0002-gb-topic-images.js", import.meta.url),
+    "utf8"
+  );
+  const { default: nextMigration } = await import(
+    `data:text/javascript;base64,${Buffer.from(nextSource).toString("base64")}`
+  );
+  const settings = new Map([
+    ["homepage_gb_works", [{ title: "A", topic_url: "/t/a/1", image: "/uploads/a.jpg", image_url: "https://example.com/a.jpg" }]],
+  ]);
+  nextMigration(settings);
+  assert.deepEqual(settings.get("homepage_gb_works"), [
+    { title: "A", topic_url: "/t/a/1" },
+  ]);
+});

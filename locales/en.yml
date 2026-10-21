@@ -2,16 +2,11 @@ en:
   theme_metadata:
     settings:
       homepage_gb_works:
-        description: "Add homepage group buys individually. Upload an image or enter an image URL; topic links must be on this site."
+        description: "Add homepage group buys individually. The first image in the topic's first post is used; topic links must be on this site."
         schema:
           properties:
             title:
               label: "Title"
-            image:
-              label: "Upload image"
-            image_url:
-              label: "Image URL (optional)"
-              description: "Use an HTTPS image URL when no image is uploaded."
             topic_url:
               label: "Community topic URL"
     description: "A Discourse theme that looks a little like reddit"

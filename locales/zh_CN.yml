@@ -3,16 +3,11 @@ zh_CN:
     description: "Moaclab 的 Reddit 风格社区主题"
     settings:
       homepage_gb_works:
-        description: "逐条添加首页 GB 作品。图片可上传，也可填写图片链接；话题链接须指向本站。"
+        description: "逐条添加首页 GB 作品，自动使用话题首帖的第一张图片；话题链接须指向本站。"
         schema:
           properties:
             title:
               label: "作品名称"
-            image:
-              label: "上传作品图片"
-            image_url:
-              label: "图片链接（可选）"
-              description: "未上传图片时可填写 HTTPS 图片链接。"
             topic_url:
               label: "社区话题链接"
   top_route_welcome: "Moaclab 墨客社区"

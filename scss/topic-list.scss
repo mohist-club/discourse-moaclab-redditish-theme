@@ -297,7 +297,7 @@ div.education {
 
 .moaclab-home-gb__arrow {
   position: absolute;
-  top: 12px;
+  top: 50%;
   display: grid;
   width: 32px;
   height: 32px;
@@ -308,6 +308,7 @@ div.education {
   color: #fff;
   background: rgb(0 0 0 / 50%);
   cursor: pointer;
+  transform: translateY(-50%);
 
   .d-icon {
     color: inherit;
@@ -324,11 +325,57 @@ div.education {
 }
 
 .moaclab-home-gb__arrow--previous {
-  right: 52px;
+  left: 12px;
 }
 
 .moaclab-home-gb__arrow--next {
   right: 12px;
+}
+
+.moaclab-home-gb__dots {
+  position: absolute;
+  bottom: 8px;
+  left: 50%;
+  display: flex;
+  max-width: calc(100% - 32px);
+  padding: 0 4px;
+  overflow-x: auto;
+  border-radius: 20px;
+  background: rgb(0 0 0 / 45%);
+  transform: translateX(-50%);
+}
+
+.moaclab-home-gb__dot {
+  display: grid;
+  flex: 0 0 20px;
+  width: 20px;
+  height: 24px;
+  padding: 0;
+  place-items: center;
+  border: 0;
+  background: transparent;
+  cursor: pointer;
+
+  &::before {
+    width: 7px;
+    height: 7px;
+    border-radius: 50%;
+    background: rgb(255 255 255 / 55%);
+    content: "";
+  }
+
+  &.is-active::before {
+    background: #fff;
+  }
+
+  &:focus-visible {
+    outline: 2px solid #fff;
+    outline-offset: -2px;
+  }
+}
+
+.moaclab-home-gb--multiple .moaclab-home-gb__content {
+  padding-bottom: 42px;
 }
 
 @media (prefers-reduced-motion: reduce) {

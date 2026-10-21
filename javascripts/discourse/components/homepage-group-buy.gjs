@@ -1,5 +1,6 @@
 import Component from "@glimmer/component";
 import { tracked } from "@glimmer/tracking";
+import { concat, fn } from "@ember/helper";
 import { on } from "@ember/modifier";
 import { action } from "@ember/object";
 import { htmlSafe } from "@ember/template";
@@ -29,20 +30,52 @@ function configuredItems() {
     : [];
   return rawItems.flatMap((item) => {
     const title = typeof item?.title === "string" ? item.title.trim() : "";
-    const image = safeUrl(item?.image || item?.image_url, true);
     const topic = safeUrl(item?.topic_url, false);
-    return title && image && topic ? [{ title, image, topic }] : [];
+    const path = topic && new URL(topic).pathname;
+    const match = path?.match(/\/t\/(?:[^/]+\/)?(\d+)(?:\/\d+)?\/?$/);
+    return title && match ? [{ title, topic, topicId: match[1] }] : [];
   });
+}
+
+async function fetchTopicImage(item, signal) {
+  try {
+    const response = await fetch(`/t/${item.topicId}.json`, {
+      credentials: "same-origin",
+      signal,
+    });
+    if (!response.ok) {
+      return item;
+    }
+    const data = await response.json();
+    const firstPost = data.post_stream?.posts?.find(
+      (post) => post.post_number === 1
+    );
+    if (!firstPost?.cooked) {
+      return item;
+    }
+    const document = new DOMParser().parseFromString(
+      firstPost.cooked,
+      "text/html"
+    );
+    const image = document.querySelector(
+      "img:not(.emoji):not(.avatar):not(.thumbnail-avatar)"
+    );
+    return { ...item, image: safeUrl(image?.getAttribute("src"), true) };
+  } catch {
+    return item;
+  }
 }
 
 export default class HomepageGroupBuy extends Component {
   @tracked index = 0;
-  items = configuredItems();
+  @tracked items = configuredItems();
   hovering = false;
   focused = false;
 
   constructor() {
     super(...arguments);
+    this.abortController = new AbortController();
+    this.loadImages();
     if (this.items.length > 1) {
       this.timer = window.setInterval(() => {
         if (
@@ -58,12 +91,26 @@ export default class HomepageGroupBuy extends Component {
 
   willDestroy() {
     super.willDestroy(...arguments);
+    this.abortController.abort();
     window.clearInterval(this.timer);
+  }
+
+  async loadImages() {
+    const items = await Promise.all(
+      this.items.map((item) =>
+        fetchTopicImage(item, this.abortController.signal)
+      )
+    );
+    if (!this.abortController.signal.aborted) {
+      this.items = items;
+    }
   }
 
   get slides() {
     return this.items.map((item, index) => ({
       ...item,
+      index,
+      position: index + 1,
       active: index === this.index,
       tabIndex: index === this.index ? 0 : -1,
     }));
@@ -85,6 +132,11 @@ export default class HomepageGroupBuy extends Component {
   @action
   next() {
     this.index = (this.index + 1) % this.items.length;
+  }
+
+  @action
+  select(index) {
+    this.index = index;
   }
 
   @action
@@ -112,7 +164,7 @@ export default class HomepageGroupBuy extends Component {
   <template>
     {{#if this.items.length}}
       <section
-        class="moaclab-home-gb"
+        class="moaclab-home-gb {{if this.multiple 'moaclab-home-gb--multiple'}}"
         aria-label="社区 GB 作品"
         {{on "mouseenter" this.pauseHover}}
         {{on "mouseleave" this.resumeHover}}
@@ -127,7 +179,7 @@ export default class HomepageGroupBuy extends Component {
               tabindex={{item.tabIndex}}
               aria-hidden={{if item.active "false" "true"}}
             >
-              <img src={{item.image}} alt="" />
+              {{#if item.image}}<img src={{item.image}} alt="" />{{/if}}
               <span class="moaclab-home-gb__content">
                 <span class="moaclab-home-gb__label">社区作品 · GB</span>
                 <strong>{{item.title}}</strong>
@@ -151,6 +203,17 @@ export default class HomepageGroupBuy extends Component {
             title="下一个作品"
             {{on "click" this.next}}
           >{{icon "chevron-right"}}</button>
+          <div class="moaclab-home-gb__dots" aria-label="选择作品">
+            {{#each this.slides as |item|}}
+              <button
+                class="moaclab-home-gb__dot {{if item.active 'is-active'}}"
+                type="button"
+                aria-label={{concat "切换到第 " item.position " 个作品"}}
+                aria-current={{if item.active "true" "false"}}
+                {{on "click" (fn this.select item.index)}}
+              ></button>
+            {{/each}}
+          </div>
         {{/if}}
       </section>
     {{/if}}
