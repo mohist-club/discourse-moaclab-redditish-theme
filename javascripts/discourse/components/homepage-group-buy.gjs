@@ -4,7 +4,6 @@ import { concat, fn } from "@ember/helper";
 import { on } from "@ember/modifier";
 import { action } from "@ember/object";
 import { htmlSafe } from "@ember/template";
-import icon from "discourse/helpers/d-icon";
 
 function safeUrl(value, image) {
   if (typeof value !== "string" || !value.trim()) {
@@ -125,16 +124,6 @@ export default class HomepageGroupBuy extends Component {
   }
 
   @action
-  previous() {
-    this.index = (this.index + this.items.length - 1) % this.items.length;
-  }
-
-  @action
-  next() {
-    this.index = (this.index + 1) % this.items.length;
-  }
-
-  @action
   select(index) {
     this.index = index;
   }
@@ -189,20 +178,6 @@ export default class HomepageGroupBuy extends Component {
           {{/each}}
         </div>
         {{#if this.multiple}}
-          <button
-            class="moaclab-home-gb__arrow moaclab-home-gb__arrow--previous"
-            type="button"
-            aria-label="上一个作品"
-            title="上一个作品"
-            {{on "click" this.previous}}
-          >{{icon "chevron-left"}}</button>
-          <button
-            class="moaclab-home-gb__arrow moaclab-home-gb__arrow--next"
-            type="button"
-            aria-label="下一个作品"
-            title="下一个作品"
-            {{on "click" this.next}}
-          >{{icon "chevron-right"}}</button>
           <div class="moaclab-home-gb__dots" aria-label="选择作品">
             {{#each this.slides as |item|}}
               <button

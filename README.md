@@ -19,7 +19,16 @@ https://github.com/mohist-club/discourse-moaclab-redditish-theme.git
 - Upstream: https://github.com/discourse/discourse-redditish-theme
 - Meta topic: https://meta.discourse.org/t/-/269466
 
-版本：`1.9.4`
+版本 / Version：`1.9.6`
+
+## 1.9.6
+
+- 移除首页 GB 轮播的左右箭头，保留底部圆点和自动切换。
+- Removed the arrows from the homepage GB carousel; dot navigation and automatic rotation remain.
+- 首页 GB 作品通过话题首帖图片展示，并可在主题设置中逐条管理。
+- Homepage GB entries use the first image from their linked topics and can be managed individually in theme settings.
+
+后续 GitHub 版本更新说明与提交信息使用中文和英文。 / Future GitHub release notes and commit messages should include both Chinese and English.
 
 ## 1.9.4
 
