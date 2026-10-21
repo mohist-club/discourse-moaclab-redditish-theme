@@ -376,6 +376,7 @@ div.education {
 
 .moaclab-home-gb--multiple .moaclab-home-gb__content {
   padding-bottom: 42px;
+  padding-inline: 56px;
 }
 
 @media (prefers-reduced-motion: reduce) {
@@ -395,8 +396,8 @@ div.education {
   background: linear-gradient(
     to bottom,
     rgb(0 0 0 / 0%),
-    rgb(0 0 0 / 78%) 58%,
-    rgb(0 0 0 / 88%)
+    rgb(0 0 0 / 55%) 58%,
+    rgb(0 0 0 / 78%)
   );
   text-shadow: 0 1px 3px rgb(0 0 0 / 65%);
 
