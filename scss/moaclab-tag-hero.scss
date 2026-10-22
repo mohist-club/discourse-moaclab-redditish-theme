@@ -1,0 +1,169 @@
+body.tags-page #main-outlet-wrapper > .moaclab-tag-hero {
+  box-sizing: border-box;
+  grid-column: 3 / 4;
+  grid-row: 1;
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 16px 24px;
+  width: 100%;
+  min-width: 0;
+  margin: 0 0 20px;
+  padding: 20px 0;
+  border: 0;
+  border-bottom: 1px solid var(--moaclab-line);
+  background: transparent;
+  color: var(--moaclab-ink);
+
+  h1 {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    margin: 0;
+    padding: 0;
+    font-size: 28px;
+    font-weight: 700;
+    line-height: 36px;
+    text-align: left;
+    white-space: normal;
+    overflow-wrap: anywhere;
+
+    a {
+      min-width: 0;
+      color: inherit;
+      font: inherit;
+      text-decoration: none;
+    }
+  }
+
+  .moaclab-tag-hero__identity {
+    flex: 1 1 160px;
+    min-width: 0;
+  }
+
+  .moaclab-tag-hero__icon {
+    flex: 0 0 24px;
+    width: 24px;
+    height: 24px;
+    background: var(--moaclab-muted);
+    mask: url($sidebar-tag) center / contain no-repeat;
+  }
+
+  .moaclab-tag-hero__count {
+    margin: 6px 0 0 34px;
+    font-size: 13px;
+    line-height: 20px;
+    color: var(--moaclab-muted);
+  }
+
+  .moaclab-tag-hero__description {
+    margin: 10px 0 0 34px;
+    font-size: 14px;
+    line-height: 22px;
+    color: var(--moaclab-muted);
+    overflow-wrap: anywhere;
+
+    > :first-child {
+      margin-top: 0;
+    }
+
+    > :last-child {
+      margin-bottom: 0;
+    }
+  }
+
+  .moaclab-tag-hero__actions {
+    display: flex;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 8px;
+
+    .btn,
+    .select-kit-header {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      min-width: 36px;
+      height: 36px;
+      padding: 0 10px;
+      border: 1px solid var(--moaclab-line);
+      border-radius: 20px;
+      background: transparent;
+      color: var(--moaclab-ink);
+      box-shadow: none;
+
+      &:hover {
+        background: var(--moaclab-pill);
+      }
+
+      &:focus-visible {
+        outline: 2px solid var(--tertiary);
+        outline-offset: 2px;
+      }
+
+      .d-icon {
+        width: 16px;
+        height: 16px;
+        font-size: 16px;
+        color: inherit;
+      }
+    }
+
+    .btn-icon {
+      width: 36px;
+      padding: 0;
+    }
+
+    .moaclab-tag-create {
+      padding-inline: 14px;
+      font-size: 13px;
+      font-weight: 600;
+    }
+
+    .in-sidebar .d-icon {
+      color: var(--tertiary);
+    }
+  }
+
+  @media (width <= 767px) {
+    grid-column: 1 / 2;
+    margin-bottom: 12px;
+    padding: 16px 16px 20px;
+    gap: 16px;
+
+    h1 {
+      font-size: 24px;
+      line-height: 32px;
+    }
+
+    .moaclab-tag-hero__actions {
+      flex-basis: 100%;
+    }
+  }
+}
+
+// Only remove duplicate native controls when their replacements are present.
+body.tags-page:has(.moaclab-tag-hero) #main-outlet {
+  #edit-tag,
+  #show-tag-info {
+    display: none;
+  }
+}
+
+.moaclab-tag-menu {
+  display: grid;
+  gap: 4px;
+  padding: 6px;
+
+  .btn {
+    justify-content: flex-start;
+    border: 0;
+    border-radius: 4px;
+    background: transparent;
+    color: var(--primary);
+
+    &:hover {
+      background: var(--primary-very-low);
+    }
+  }
+}

@@ -50,5 +50,12 @@ acceptance("Redditish Theme | tag routes", function (needs) {
     assert
       .dom(".custom-tag-banner h1")
       .hasText("important", "tag banner displays the tag name");
+    assert.dom(".moaclab-tag-hero__count").hasText("5 topics");
+    assert
+      .dom(".moaclab-tag-hero__description")
+      .hasText("Important topics for discussion");
+    assert.dom(".moaclab-tag-hero__actions .moaclab-tag-create").exists();
+    assert.dom(".moaclab-tag-hero__actions .add-to-sidebar").exists();
+    assert.dom(".custom-right-sidebar_tag-about").doesNotExist();
   });
 });

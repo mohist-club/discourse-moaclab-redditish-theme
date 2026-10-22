@@ -19,7 +19,16 @@ https://github.com/mohist-club/discourse-moaclab-redditish-theme.git
 - Upstream: https://github.com/discourse/discourse-redditish-theme
 - Meta topic: https://meta.discourse.org/t/-/269466
 
-版本 / Version：`1.9.7`
+版本 / Version：`1.9.8`
+
+## 1.9.8
+
+- 标签页使用简洁页头，自动读取名称、简介及话题数，无需配置背景图。
+- Tag pages use a compact header with the existing name, description, and topic count; no cover images or per-tag configuration are required.
+- 新建话题、原生通知和收藏入口集中到标题区，更多菜单保留标签信息和有权限用户的编辑入口。
+- Topic creation, native notifications, and sidebar bookmarks are grouped in the header; the more menu preserves tag information and permission-based editing.
+- 标题区与帖子列表对齐，移动端操作换行；保留全站导航、类别页及 700px 信息流布局。
+- The header aligns with the feed and wraps its actions on mobile, preserving site navigation, category pages, and the 700px feed layout.
 
 ## 1.9.7
 
