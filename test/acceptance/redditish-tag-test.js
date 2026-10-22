@@ -1,4 +1,4 @@
-import { visit } from "@ember/test-helpers";
+import { find, visit } from "@ember/test-helpers";
 import { test } from "qunit";
 import { cloneJSON } from "discourse/lib/object";
 import discoveryFixture from "discourse/tests/fixtures/discovery-fixtures";
@@ -57,5 +57,19 @@ acceptance("Redditish Theme | tag routes", function (needs) {
     assert.dom(".moaclab-tag-hero__actions .moaclab-tag-create").exists();
     assert.dom(".moaclab-tag-hero__actions .add-to-sidebar").exists();
     assert.dom(".custom-right-sidebar_tag-about").doesNotExist();
+    const trigger = find(
+      ".moaclab-tag-hero .tag-notifications-button .select-kit-header"
+    ).getBoundingClientRect();
+    const bell = find(
+      ".moaclab-tag-hero .tag-notifications-button .select-kit-header .d-icon"
+    ).getBoundingClientRect();
+    assert.true(
+      Math.abs(bell.x + bell.width / 2 - trigger.x - trigger.width / 2) < 0.5,
+      "notification bell is horizontally centered"
+    );
+    assert.true(
+      Math.abs(bell.y + bell.height / 2 - trigger.y - trigger.height / 2) < 0.5,
+      "notification bell is vertically centered"
+    );
   });
 });

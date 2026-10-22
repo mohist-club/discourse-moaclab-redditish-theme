@@ -19,7 +19,12 @@ https://github.com/mohist-club/discourse-moaclab-redditish-theme.git
 - Upstream: https://github.com/discourse/discourse-redditish-theme
 - Meta topic: https://meta.discourse.org/t/-/269466
 
-版本 / Version：`1.9.8`
+版本 / Version：`1.9.9`
+
+## 1.9.9
+
+- 修复标签页关注提醒按钮的铃铛偏左问题，图标在圆形按钮内水平、垂直居中，保留原生通知菜单。
+- Center the tag notification bell horizontally and vertically within its circular trigger while preserving the native notification menu.
 
 ## 1.9.8
 

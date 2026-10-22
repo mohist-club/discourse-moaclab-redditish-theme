@@ -114,6 +114,28 @@ body.tags-page #main-outlet-wrapper > .moaclab-tag-hero {
       padding: 0;
     }
 
+    // SelectKit's inner wrapper spans the trigger but defaults to left alignment.
+    .tag-notifications-button > .select-kit-header {
+      .select-kit-header-wrapper {
+        align-items: center;
+        justify-content: center;
+        width: 100%;
+        height: 100%;
+      }
+
+      .select-kit-selected-name {
+        flex: 0 0 auto;
+        align-items: center;
+        justify-content: center;
+        margin: 0;
+        padding: 0;
+      }
+
+      .d-icon {
+        margin: 0;
+      }
+    }
+
     .moaclab-tag-create {
       padding-inline: 14px;
       font-size: 13px;
