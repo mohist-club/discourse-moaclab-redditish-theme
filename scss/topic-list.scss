@@ -49,10 +49,12 @@ body.category,
 }
 
 #navigation-bar {
+  box-sizing: border-box;
   width: 100%;
   margin: 0 0 1em 0;
-
-  @include custom-card;
+  padding: 0;
+  border: 0;
+  background: transparent;
 }
 
 .list-controls {

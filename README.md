@@ -19,7 +19,14 @@ https://github.com/mohist-club/discourse-moaclab-redditish-theme.git
 - Upstream: https://github.com/discourse/discourse-redditish-theme
 - Meta topic: https://meta.discourse.org/t/-/269466
 
-版本 / Version：`1.9.9`
+版本 / Version：`1.9.10`
+
+## 1.9.10
+
+- 移除话题筛选导航残留的卡片样式，修复鼠标悬停时出现整栏矩形边框的问题。
+- Remove the legacy card styling from topic filter navigation, fixing the rectangular border appearing on hover.
+- 保留主题的选中与悬停色块，以及原生最新、热门、排行榜和时间范围筛选交互。
+- Preserve theme selection and hover treatments, native Latest/Hot/Top navigation, and the ranking period selector.
 
 ## 1.9.9
 
