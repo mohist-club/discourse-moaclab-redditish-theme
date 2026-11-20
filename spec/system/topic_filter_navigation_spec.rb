@@ -7,6 +7,9 @@ RSpec.describe "Topic filter navigation", system: true do
 
   before do
     SiteSetting.tagging_enabled = true
+    # "top" is not part of core's default top_menu, so the Top nav item only
+    # renders when the site enables it (as moaclab.com does).
+    SiteSetting.top_menu = "latest|hot|top|categories"
     page.current_window.resize_to(1440, 1000)
   end
 
